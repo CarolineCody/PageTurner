@@ -1,5 +1,5 @@
-#include "titleMenu.hpp"
-#include "storyMenu.hpp"
+#include "./menu/titleMenu.hpp"
+#include "./menu/storyMenu.hpp"
 
 //Handles the test play section. This allows the user to quickly test out the scene without having to hop through a bunch of menus.
 #ifndef QT_HPP

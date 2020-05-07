@@ -1,5 +1,5 @@
 #include <iostream>
-#include "quickTest.hpp"
+#include "../quickTest.hpp"
 #include "storyMenu.hpp"
 #include "makeMenu.hpp"
 
@@ -35,7 +35,7 @@ void storyMenu::printMenu(){
     std::cout << "|                      Edit a Story                    |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cout << "| 1) Read Story                                        |" << std::endl;
-    std::cout << "| 2) Return to Title Screen                            |" << std::endl;
+    std::cout << "| 2) Return to Make Menu                               |" << std::endl;
     std::cout << "| 3) Quit                                              |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cin >> userInput;
