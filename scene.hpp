@@ -15,7 +15,7 @@ class scene{
         void addChoice(choice * newChoice);//Handles new choice creation and adding it into the choices vector.
         void removeChoice(std::string choiceName);//Handles removing a given choice within name.
         void setTitle(std::string newTitle);//Changes the text to this new value.
-        void editText();                   //Really messy and hazerdous menu to both my own and everyones health.
-    /*Implement Later*/
+        void editText();                   //Really messy and hazerdous menu to both my own and everyones health. Manages adding new text
+                                           //Removing old text, and even insert text dead in the middle of other text.
 };
 #endif
