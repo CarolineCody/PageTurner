@@ -11,7 +11,6 @@ scene::scene(){
     std::cout << "New scene created. What would you like to call this scene?" << std::endl;
     std::getline(std::cin, userInput);
     std::cin.clear();
-    std::cin.ignore();
     setTitle(userInput);
     editText();
 }
@@ -124,18 +123,18 @@ void scene::editText(){
         std::cout << "| Or enter -1 to quit.                                 |" << std::endl;
         std::cout << "| Line #: ";
         std::cin >> userLineSelection;
+        std::cin.clear();
+        std::cin.ignore();
         std::cout << std::endl;
         //Checks to see if the user wanted to quit wanted to actually edit a line, or just quit.
         if(userLineSelection == -1){
             userIsDone = true;
         }
-        else if(userLineSelection >= 0 && userLineSelection < text.size()){
-            //A valid line was selected.
-            std::cin.clear();
-            std::cin.ignore();
+        else if((userLineSelection >= 0 && userLineSelection < text.size()) || (text.size() == 0)){
             //Keeps track of if the user is done editing lines or not.
             bool userDoneEditing = false;
             while(!userDoneEditing){
+                userAction = 0;
                 std::cout << "========================================================" << std::endl;
                 std::cout << "| What would you like to do with this line?            |" << std::endl;
                 std::cout << "| 1) Add a new line.                                   |" << std::endl;
@@ -144,31 +143,49 @@ void scene::editText(){
                 std::cout << "| 4) Quit.                                             |" << std::endl;
                 std::cout << "========================================================" << std::endl;
                 std::cin >> userAction;
+                std::cin.clear();
+                std::cin.ignore();
                 switch(userAction){
                     case 1:{
                         //Records the new line that the user wants to add.
                         std::string newLine;
                         std::cout << "Write in what you would like to add." << std::endl;
                         std::getline(std::cin,newLine);
-                        text.insert(text.begin()+userLineSelection,newLine);
-                        std::cin.clear();
-                        std::cin.ignore();
+                        if(text.size() == 0){
+                            text.push_back(newLine);
+                        }
+                        else{
+                            text.insert(text.begin()+userLineSelection,newLine);
+                        }
                         break;
                     }
                     case 2:{
                         //Remove this line.
-                        text.erase(text.begin()+userLineSelection);
+                        if(text.size() > 0){
+                            text.erase(text.begin()+userLineSelection);
+                        }
+                        else{
+                            std::cout << "Unable to delete from text with length of zero." << std::endl;
+                        }
                         break;
                     }
                     case 3:{
                         //Replaces a line.
-                        text.erase(text.begin()+userLineSelection);
-                        std::string newLine;
-                        std::cout << "Write in what you would like to add." << std::endl;
-                        std::getline(std::cin,newLine);
-                        text.insert(text.begin()+userLineSelection,newLine);
-                        std::cin.clear();
-                        std::cin.ignore();
+                        if(text.size() > 0){
+                            text.erase(text.begin()+userLineSelection);
+                            std::string newLine;
+                            std::cout << "Write in what you would like to replace this line." << std::endl;
+                            std::getline(std::cin,newLine);
+                            if(text.size() == 0){
+                                text.push_back(newLine);
+                            }
+                            else{
+                                text.insert(text.begin()+userLineSelection,newLine);
+                            }
+                        }
+                        else{
+                            std::cout << "Cannot replace a line that does not exist." << std::endl;
+                        }
                         break;
                     }
                     case 4:{
@@ -176,10 +193,10 @@ void scene::editText(){
                         break;
                     }
                     default:{
-                        std::cin.clear();
-                        std::cin.ignore();
                         break;
                     }
+                    std::cin.clear();
+                    std::cin.ignore();
                 };
             }
         }
@@ -187,8 +204,6 @@ void scene::editText(){
             std::cin.clear();
             std::cin.ignore();
         }
-        std::cin.clear();
-        std::cin.ignore();
     }
     std::cout << "Edits to scene \"" << title << "\" are now complete." << std::endl; 
     return;

@@ -3,6 +3,7 @@
 #include "./menu/playMenu.hpp"
 #include "./menu/titleMenu.hpp"
 #include "./menu/storyMenu.hpp"
+#include "scene.hpp"
 
 int main(){
     //Constructs all the menus.
@@ -15,6 +16,7 @@ int main(){
     make->setParent(title);
     play->setParent(title);
     title->setActive = true;
+    scene * bip = new scene();
     //This generates a switch pattern between all the different menus, allowing them all to loop without every having to really share
     //The objects between them. This is pretty clever but I am sure there are smarter ways of doing this. This is just how my coding
     //monkey brain went about this.
