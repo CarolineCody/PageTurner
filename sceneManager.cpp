@@ -1,1 +1,329 @@
-/*Will need a proper class later.*/
+#include <vector>
+#include <iostream>
+#include "scene.hpp"
+#include "sceneManager.hpp"
+#include "./dataStructs/choice.hpp"
+#include "./dataStructs/tag.hpp"
+
+void sceneManager::sceneSelection(){
+    scene * activeScene;
+    int sceneSelectionNumber;
+    int userActionChoice;
+    bool validActionTaken = false;
+    std::cout << "========================================================" << std::endl;
+    std::cout << "|                   Select a Scene                     |" << std::endl;
+    std::cout << "========================================================" << std::endl;
+    for(int c = 0; c < scenes.size(); c++){
+        std::cout << "|" << c+1 << ") " << scenes[c].getTitle() << std::endl;
+    }
+    while(!validActionTaken){
+        std::cout << "Enter in the number of the scene you would like to activly edit." << std::endl;
+        std::cin >> sceneSelectionNumber;
+        if(sceneSelectionNumber > 0 && sceneSelectionNumber <= scenes.size()){
+            activeScene = &scenes[sceneSelectionNumber-1];
+            validActionTaken = true;
+        }
+        else{
+            std::cin.clear();
+            std::cin.ignore();
+        }
+    }
+    validActionTaken = false;
+    while(!validActionTaken){
+        std::cout << "========================================================" << std::endl;
+        std::cout << "|                    Scene Manager                     |" << std::endl;
+        std::cout << "========================================================" << std::endl;
+        std::cout << "| 1) Edit tags of choices.                             |" << std::endl;
+        std::cout << "| 2) Add choice to Scene.                              |" << std::endl;
+        std::cout << "| 3) Remove choice from Scene.                         |" << std::endl;
+        std::cout << "| 4) Set Scene title.                                  |" << std::endl;
+        std::cout << "| 5) Edit Scene text.                                  |" << std::endl;
+        std::cout << "| 6) Set the scene that a choice connects to.          |" << std::endl;
+        std::cout << "| 7) Quit.                                             |" << std::endl;
+        std::cin >> userActionChoice;
+        switch(userActionChoice){
+            case 1:{
+                int choiceSelection = 0;
+                bool doneMakingChoice;
+                choice * activeChoice;
+                std::cout << "Here are the choices listed under this scene. Select the number of the scene you would like to edit." << std::endl;
+                for(int c = 0; c < activeScene->choices.size(); c++){
+                    std::cout << c+1 << ") " << activeScene->choices[c]->text << std::endl;
+                }
+                std::cin >> choiceSelection;
+                if(choiceSelection > 0 && choiceSelection <= activeScene->choices.size()){
+                    activeChoice = activeScene->choices[choiceSelection-1];
+                }
+                while(!doneMakingChoice){
+                    int tagChoice = 0;
+                    bool validTagNumber = false;
+                    std::cout << "Select the number of the tag you would like to add/remove to/from this choice." << std::endl;
+                    std::cout << "Enter -1 to quit." << std::endl;
+                    for(int c = 0; c< tags.size(); c++){
+                        std::cout << c+1 << ") " << tags[c].name << std::endl;
+                    }
+                    while(!validTagNumber){
+                        std::cin >> tagChoice;
+                        char userCharChoice;
+                        if(tagChoice > 0 && tagChoice <= tags.size()){
+                            validTagNumber = true;
+                            std::cout << "Would you like to add this tag or remove this tag (+/-)?" << std::endl;
+                            std::cout << "Enter anything else to quit."                             << std::endl;
+                            std::cin >> userCharChoice;
+                            switch(userCharChoice){
+                                case '+':{
+                                    int giveOrRequire = 0;
+                                    std::cout << "Would you like it to be given upon selecting this choice? Or Required to select this choice?" << std::endl;
+                                    std::cout << "1) Give." << std::endl;
+                                    std::cout << "2) Take." << std::endl;
+                                    std::cout << "Enter anything else to quit." << std::endl;
+                                    std::cin >> giveOrRequire;
+                                    if(giveOrRequire == 1){
+                                        activeChoice->gives.push_back(tags[tagChoice-1]);
+                                    }
+                                    else if(giveOrRequire == 2){
+                                        activeChoice->gives.push_back(tags[tagChoice-1]);
+                                    }
+                                    break;
+                                }
+                                case '-':{
+                                    int giveOrRequire = 0;
+                                    std::cout << "From where would you like to remove from?" << std::endl;
+                                    std::cout << "1) Give." << std::endl;
+                                    std::cout << "2) Take." << std::endl;
+                                    std::cout << "Enter anything else to quit." << std::endl;
+                                    std::cin >> giveOrRequire;
+                                    if(giveOrRequire == 1){
+                                        for(int c = 0; c < activeChoice->gives.size(); c++){
+                                            if(activeChoice->gives[c].name == tags[tagChoice-1].name){
+                                                activeChoice->gives.erase(activeChoice->gives.begin()+c);
+                                            }
+                                        }
+                                    }
+                                    else if(giveOrRequire == 2){
+                                        for(int c = 0; c < activeChoice->required.size(); c++){
+                                            if(activeChoice->required[c].name == tags[tagChoice-1].name){
+                                                activeChoice->required.erase(activeChoice->required.begin()+c);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        else if(tagChoice == -1){
+                            doneMakingChoice = true;
+                            validTagNumber = true;
+                        }
+                        else{
+                            tagChoice = 0;
+                        }
+                        std::cin.clear();
+                        std::cin.ignore();
+                    }
+
+                }
+                break;
+            }
+            case 2:{
+                choice * newChoice = new choice();
+                std::string newChoiceText;
+                bool doneMakingChoice = false;
+                int choiceMenuInput;
+                std::cout << "What would you like to this new choice to say?" << std::endl;
+                std::getline(std::cin,newChoiceText);
+                newChoice->text = newChoiceText;
+                while(!doneMakingChoice){
+                    int tagChoice = 0;
+                    bool validTagNumber = false;
+                    std::cout << "Select the number of the tag you would like to add/remove to/from this choice." << std::endl;
+                    for(int c = 0; c< tags.size(); c++){
+                        std::cout << c+1 << ") " << tags[c].name << std::endl;
+                    }
+                    while(!validTagNumber){
+                        std::cin >> tagChoice;
+                        char userCharChoice;
+                        if(tagChoice > 0 && tagChoice <= tags.size()){
+                            validTagNumber = true;
+                            std::cout << "Would you like to add this tag or remove this tag (+/-)?" << std::endl;
+                            std::cout << "Enter anything else to quit."                             << std::endl;
+                            std::cin >> userCharChoice;
+                            switch(userCharChoice){
+                                case '+':{
+                                    int giveOrRequire = 0;
+                                    std::cout << "Would you like it to be given upon selecting this choice? Or Required to select this choice?" << std::endl;
+                                    std::cout << "1) Give." << std::endl;
+                                    std::cout << "2) Take." << std::endl;
+                                    std::cout << "Enter anything else to quit." << std::endl;
+                                    std::cin >> giveOrRequire;
+                                    if(giveOrRequire == 1){
+                                        newChoice->gives.push_back(tags[tagChoice-1]);
+                                    }
+                                    else if(giveOrRequire == 2){
+                                        newChoice->gives.push_back(tags[tagChoice-1]);
+                                    }
+                                    break;
+                                }
+                                case '-':{
+                                    int giveOrRequire = 0;
+                                    std::cout << "From where would you like to remove from?" << std::endl;
+                                    std::cout << "1) Give." << std::endl;
+                                    std::cout << "2) Take." << std::endl;
+                                    std::cout << "Enter anything else to quit." << std::endl;
+                                    std::cin >> giveOrRequire;
+                                    if(giveOrRequire == 1){
+                                        for(int c = 0; c < newChoice->gives.size(); c++){
+                                            if(newChoice->gives[c].name == tags[tagChoice-1].name){
+                                                newChoice->gives.erase(newChoice->gives.begin()+c);
+                                            }
+                                        }
+                                    }
+                                    else if(giveOrRequire == 2){
+                                        for(int c = 0; c < newChoice->required.size(); c++){
+                                            if(newChoice->required[c].name == tags[tagChoice-1].name){
+                                                newChoice->required.erase(newChoice->required.begin()+c);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        else{
+                            tagChoice = 0;
+                        }
+                        std::cin.clear();
+                        std::cin.ignore();
+                    }
+
+                }
+                activeScene->choices.push_back(newChoice);
+                break;
+            }
+            case 3:{
+                std::string choiceName;
+                int choice;
+                bool validChoice = false;
+                std::cout << "Select the line number that represents the choice you would like to remove?" << std::endl;
+                for(int c = 0; c < activeScene->choices.size(); c++){
+                    std::cout << c+1 << ") " << activeScene->choices[c]->text << std::endl;
+                }
+                while(!validChoice){
+                    std::cin >> choice;
+                    if(choice > 0 && choice <= activeScene->choices.size()){
+                        validChoice = true;
+                    }
+                    else{
+                        std::cout << "Invalid choice selected. Please select a new line number for a choice." << std::endl;
+                    }
+                    std::cin.clear();
+                    std::cin.ignore();
+                }
+                choiceName = activeScene->choices[choice-1]->text;
+                activeScene->removeChoice(choiceName);
+                break;
+            }
+            case 4:{
+                std::string newTitle;
+                std::cout << "What would you like to change the scene title to?" << std::endl;
+                std::getline(std::cin,newTitle);
+                activeScene->setTitle(newTitle);
+                std::cout << "Title is now set to \"" << newTitle << "\"." << std::endl;
+                break;
+            }
+            case 5:{
+                activeScene->editText();
+                break;
+            }
+            case 6:{
+                int choiceSelection = 0;
+                int sceneSelection = 0;
+                choice * activeChoice;
+                scene * linkedScene;
+                std::cout << "Here are the choices listed under this scene. Select the number of the scene you would like to edit." << std::endl;
+                for(int c = 0; c < activeScene->choices.size(); c++){
+                    std::cout << c+1 << ") " << activeScene->choices[c]->text << std::endl;
+                }
+                std::cin >> choiceSelection;
+                if(choiceSelection > 0 && choiceSelection <= activeScene->choices.size()){
+                    activeChoice = activeScene->choices[choiceSelection-1];
+                }
+                std::cout << "Select a scene you would like to connect to this choice." << std::endl;
+                for(int c = 0; c < scenes.size(); c++){
+                    std::cout << c+1 << ") " << scenes[c].getTitle() << std::endl;
+                }
+                std::cin >> sceneSelection;
+                if(sceneSelection > 0 && sceneSelection <= scenes.size()){
+                    activeChoice->scene = scenes[sceneSelection-1].getTitle();
+                }
+                else{
+                    std::cout << "Invalid scene selected." << std::endl;
+                }
+                break;
+            }
+            case 7:{
+                validActionTaken = true;
+                break;
+            }
+            std::cin.clear();
+            std::cin.ignore();
+        };
+    }
+}
+
+void sceneManager::tagsManager(){
+    bool userIsDone = false;
+    int userAction;
+    while(!userIsDone){
+        std::cout << "========================================================" << std::endl;
+        std::cout << "|                       Tags Manager                   |" << std::endl;
+        std::cout << "========================================================" << std::endl;
+        std::cout << "| 1) Add a Tag.                                        |" << std::endl;
+        std::cout << "| 2) Remove a Tag.                                     |" << std::endl;
+        std::cout << "| 3) Quit.                                             |" << std::endl;
+        std::cout << "========================================================" << std::endl;
+        std::cin >> userAction;
+        switch(userAction){
+            case 1:{
+                tag newTag;
+                std::string tagName;
+                int tagAmount;
+                std::cout << "Enter the name of the tag you would like to create." << std::endl;
+                std::getline(std::cin,tagName);
+                std::cin.clear();
+                std::cin.ignore();
+                std::cout << "Enter the amount of the tag." << std::endl;
+                std::cin >> tagAmount;
+                std::cin.clear();
+                std::cin.ignore();
+                newTag.name = tagName;
+                newTag.amount = tagAmount;
+                tags.push_back(newTag);
+                std::cout << "New tag added." << std::endl;
+                break;
+            }
+            case 2:{
+                int indexToRemove;
+                std::cout << "Select a tag to remove." << std::endl;
+                for(int c = 0; c < tags.size(); c++){
+                    std::cout << c+1 << ") " << tags[c].name << std::endl;
+                }
+                std::cin >> indexToRemove;
+                if(indexToRemove > 0 && indexToRemove <= tags.size()){
+                    tags.erase(tags.begin()+indexToRemove-1);
+                    std::cout << "Tag has been removed." << std::endl; 
+                }
+                else{
+                    std::cout << "Removal was unsuccessful, invalid line found." << std::endl;
+                }
+                break;
+            }
+            case 3:{
+                userIsDone = true;
+                break;
+            }
+            std::cin.clear();
+            std::cin.ignore();
+        };
+    }
+}

@@ -96,6 +96,21 @@ void scene::removeChoice(std::string choiceName){
     return;
 }
 
+choice * scene::getChoice(std::string choiceName){
+    choice * foundChoice = NULL;
+    for(int c = 0; c < choices.size(); c++){
+        if(choiceName == choices[c]->text){
+            foundChoice = choices[c];
+        }
+        std::cout << "Choice found at index: " << c << "." << std::endl;
+    }
+    return foundChoice;
+}
+
+std::string scene::getTitle(){
+    return title;
+}
+
 void scene::setTitle(std::string newTitle){
     title = newTitle;
     std::cout << "Title has been set to \"" << newTitle << "\"." << std::endl;
