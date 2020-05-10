@@ -35,11 +35,12 @@ void sceneManager::sceneSelection(){
         std::cout << "========================================================" << std::endl;
         std::cout << "| 1) Edit tags of choices.                             |" << std::endl;
         std::cout << "| 2) Add choice to Scene.                              |" << std::endl;
-        std::cout << "| 3) Remove choice from Scene.                         |" << std::endl;
-        std::cout << "| 4) Set Scene title.                                  |" << std::endl;
-        std::cout << "| 5) Edit Scene text.                                  |" << std::endl;
-        std::cout << "| 6) Set the scene that a choice connects to.          |" << std::endl;
-        std::cout << "| 7) Quit.                                             |" << std::endl;
+        std::cout << "| 3) Edit choice title.                                |" << std::endl;
+        std::cout << "| 4) Remove choice from Scene.                         |" << std::endl;
+        std::cout << "| 5) Set Scene title.                                  |" << std::endl;
+        std::cout << "| 6) Edit Scene text.                                  |" << std::endl;
+        std::cout << "| 7) Set the scene that a choice connects to.          |" << std::endl;
+        std::cout << "| 8) Quit.                                             |" << std::endl;
         std::cin >> userActionChoice;
         switch(userActionChoice){
             case 1:{
@@ -80,9 +81,33 @@ void sceneManager::sceneSelection(){
                                     std::cin >> giveOrRequire;
                                     if(giveOrRequire == 1){
                                         activeChoice->gives.push_back(tags[tagChoice-1]);
+                                        bool quantityFound = false;
+                                        int quantity;
+                                        while(!quantityFound){
+                                            std::cout << "How many of these tags would you like to give?" << std::endl;
+                                            std::cin >> quantity;
+                                            if(!std::cin.fail()){
+                                                quantityFound = true;
+                                                activeChoice->gives[activeChoice->gives.size()-1].amount = quantity;
+                                            }
+                                            std::cin.clear();
+                                            std::cin.ignore();
+                                        }
                                     }
                                     else if(giveOrRequire == 2){
                                         activeChoice->gives.push_back(tags[tagChoice-1]);
+                                        bool quantityFound = false;
+                                        int quantity;
+                                        while(!quantityFound){
+                                            std::cout << "How many of these tags would you like to require?" << std::endl;
+                                            std::cin >> quantity;
+                                            if(!std::cin.fail()){
+                                                quantityFound = true;
+                                                activeChoice->gives[activeChoice->gives.size()-1].amount = quantity;
+                                            }
+                                            std::cin.clear();
+                                            std::cin.ignore();
+                                        }
                                     }
                                     break;
                                 }
@@ -96,14 +121,24 @@ void sceneManager::sceneSelection(){
                                     if(giveOrRequire == 1){
                                         for(int c = 0; c < activeChoice->gives.size(); c++){
                                             if(activeChoice->gives[c].name == tags[tagChoice-1].name){
-                                                activeChoice->gives.erase(activeChoice->gives.begin()+c);
+                                                if(activeChoice->gives.size() > 1){
+                                                    activeChoice->gives.erase(activeChoice->gives.begin()+c);
+                                                }
+                                                else{
+                                                    activeChoice->gives.pop_back();
+                                                }
                                             }
                                         }
                                     }
                                     else if(giveOrRequire == 2){
                                         for(int c = 0; c < activeChoice->required.size(); c++){
                                             if(activeChoice->required[c].name == tags[tagChoice-1].name){
-                                                activeChoice->required.erase(activeChoice->required.begin()+c);
+                                                if(activeChoice->gives.size() > 1){
+                                                    activeChoice->gives.erase(activeChoice->gives.begin()+c);
+                                                }
+                                                else{
+                                                    activeChoice->gives.pop_back();
+                                                }
                                             }
                                         }
                                     }
@@ -174,14 +209,26 @@ void sceneManager::sceneSelection(){
                                     if(giveOrRequire == 1){
                                         for(int c = 0; c < newChoice->gives.size(); c++){
                                             if(newChoice->gives[c].name == tags[tagChoice-1].name){
-                                                newChoice->gives.erase(newChoice->gives.begin()+c);
+                                                if(newChoice->gives.size() > 1){
+                                                    newChoice->gives.erase(newChoice->gives.begin()+c);
+                                                }
+                                                else{
+                                                    newChoice->gives.pop_back();
+                                                }
                                             }
                                         }
                                     }
                                     else if(giveOrRequire == 2){
                                         for(int c = 0; c < newChoice->required.size(); c++){
                                             if(newChoice->required[c].name == tags[tagChoice-1].name){
-                                                newChoice->required.erase(newChoice->required.begin()+c);
+                                                if(newChoice->gives[c].name == tags[tagChoice-1].name){
+                                                if(newChoice->gives.size() > 1){
+                                                    newChoice->gives.erase(newChoice->gives.begin()+c);
+                                                }
+                                                else{
+                                                    newChoice->gives.pop_back();
+                                                }
+                                            }
                                             }
                                         }
                                     }
@@ -201,6 +248,34 @@ void sceneManager::sceneSelection(){
                 break;
             }
             case 3:{
+                bool userIsDone = false;
+                int userChoice = 0;
+                while(!userIsDone){
+                    std::cout << "Which choice would you like to change?" << std::endl;
+                    for(int c = 0; c < activeScene->choices.size(); c++){
+                        std::cout << c << ") " << activeScene->choices[c] << std::endl;
+                    }
+                    std::cin >> userChoice;
+                    std::cin.clear();
+                    std::cin.ignore();
+                    if(userChoice > 0 && userChoice <= activeScene->choices.size()){
+                        userIsDone = true;
+                        std::string newText;
+                        bool nameChoosen = false;
+                        while(!nameChoosen){
+                            std::cout << "What would you like it to say?" << std::endl;
+                            std::getline(std::cin,newText);
+                            if(newText.length() > 0){
+                                activeScene->choices[userChoice-1]->text = newText;
+                            }
+                            std::cin.clear();
+                            std::cin.ignore();
+                        }
+                    }
+                }
+                break;
+            }
+            case 4:{
                 std::string choiceName;
                 int choice;
                 bool validChoice = false;
@@ -223,7 +298,7 @@ void sceneManager::sceneSelection(){
                 activeScene->removeChoice(choiceName);
                 break;
             }
-            case 4:{
+            case 5:{
                 std::string newTitle;
                 std::cout << "What would you like to change the scene title to?" << std::endl;
                 std::getline(std::cin,newTitle);
@@ -231,11 +306,11 @@ void sceneManager::sceneSelection(){
                 std::cout << "Title is now set to \"" << newTitle << "\"." << std::endl;
                 break;
             }
-            case 5:{
+            case 6:{
                 activeScene->editText();
                 break;
             }
-            case 6:{
+            case 7:{
                 int choiceSelection = 0;
                 int sceneSelection = 0;
                 choice * activeChoice;
@@ -261,7 +336,7 @@ void sceneManager::sceneSelection(){
                 }
                 break;
             }
-            case 7:{
+            case 8:{
                 validActionTaken = true;
                 break;
             }
@@ -310,7 +385,12 @@ void sceneManager::tagsManager(){
                 }
                 std::cin >> indexToRemove;
                 if(indexToRemove > 0 && indexToRemove <= tags.size()){
-                    tags.erase(tags.begin()+indexToRemove-1);
+                    if(tags.size() > 1){
+                        tags.erase(tags.begin()+indexToRemove-1);
+                    }
+                    else{
+                        tags.pop_back();
+                    }
                     std::cout << "Tag has been removed." << std::endl; 
                 }
                 else{
