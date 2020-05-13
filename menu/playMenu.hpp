@@ -1,6 +1,7 @@
 #include <vector>
 #include "titleMenu.hpp"
 #include "../scene.hpp"
+#include "../dataStructs/tag.hpp"
 
 //Handles the play menu where the user selects what story they want to read at the start or midway through.
 #ifndef PM_HPP
@@ -9,6 +10,7 @@ class playMenu{
     private:
         titleMenu* title;                           //References the titleMenu that the this menu connects to.
         std::vector<scene> stories;                 //Stores a reference to all the starting scene of every story.
+        std::vector<tag>* ownedTags;                //Stored reference to the users tags.
     public:
     playMenu();                                     //Default constructor that also handles and assigns what node to travel back to.
     void setParent(titleMenu * titleM);              //Sets the parent of this menu.

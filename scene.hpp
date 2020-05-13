@@ -14,10 +14,12 @@ class scene{
         void addChoice(choice * newChoice);//Handles new choice creation and adding it into the choices vector.
         void removeChoice(std::string choiceName);//Handles removing a given choice within name.
         choice * getChoice(std::string choiceName);//Returns a choice for manipulation and any changes necessary.
+        void printChoices();               //Prints out the choices of this scene to anyone who needs it.
         std::string getTitle();            //Returns the title of the scene.
         void setTitle(std::string newTitle);//Changes the text to this new value.
         void editText();                   //Really messy and hazerdous menu to both my own and everyones health. Manages adding new text
                                            //Removing old text, and even insert text dead in the middle of other text.
+        void printText();                  //Prints all text in file one line at a time.
         std::vector<choice *> choices;      //Contains the list of choices that the player can select.
 };
 #endif

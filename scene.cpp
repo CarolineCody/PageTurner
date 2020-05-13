@@ -102,7 +102,6 @@ choice * scene::getChoice(std::string choiceName){
         if(choiceName == choices[c]->text){
             foundChoice = choices[c];
         }
-        std::cout << "Choice found at index: " << c << "." << std::endl;
     }
     return foundChoice;
 }
@@ -221,5 +220,12 @@ void scene::editText(){
         }
     }
     std::cout << "Edits to scene \"" << title << "\" are now complete." << std::endl; 
+    return;
+}
+
+void scene::printText(){
+    for(int c = 0; c < text.size(); c++){
+        std::cout << text[c] << std::endl;
+    }
     return;
 }
