@@ -1,7 +1,7 @@
 #include <vector>
 #include "scene.hpp"
-#include "./dataStructs/choice.hpp"
-#include "./dataStructs/tag.hpp"
+#include "../dataStructs/choice.hpp"
+#include "../dataStructs/tag.hpp"
 
 class sceneManager{
     public:

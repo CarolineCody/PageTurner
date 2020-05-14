@@ -1,6 +1,6 @@
 #include <vector>
 #include <string>
-#include "./dataStructs/choice.hpp"
+#include "../dataStructs/choice.hpp"
 
 //Handles the scene menu that allows the user to manipulate and change a scene.
 #ifndef SCN_HPP

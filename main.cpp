@@ -3,7 +3,7 @@
 #include "./menu/playMenu.hpp"
 #include "./menu/titleMenu.hpp"
 #include "./menu/storyMenu.hpp"
-#include "scene.hpp"
+#include "./sceneManagement/scene.hpp"
 
 int main(){
     //Constructs all the menus.

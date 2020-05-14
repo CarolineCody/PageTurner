@@ -2,8 +2,8 @@
 #include <iostream>
 #include "scene.hpp"
 #include "sceneManager.hpp"
-#include "./dataStructs/choice.hpp"
-#include "./dataStructs/tag.hpp"
+#include "../dataStructs/choice.hpp"
+#include "../dataStructs/tag.hpp"
 
 void sceneManager::sceneSelection(){
     scene * activeScene;

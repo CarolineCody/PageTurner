@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../quickTest.hpp"
+#include "../sceneManagement/quickTest.hpp"
 #include "storyMenu.hpp"
 #include "makeMenu.hpp"
 

@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include "scene.hpp"
-#include "./dataStructs/choice.hpp"
+#include "../dataStructs/choice.hpp"
 
 scene::scene(){
     std::string userInput;
