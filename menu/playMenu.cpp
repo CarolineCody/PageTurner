@@ -1,5 +1,6 @@
 #include <iostream>
 #include "playMenu.hpp"
+#include "../sceneManagement/scene.hpp"
 #include "../dataStructs/tag.hpp"
 
 playMenu::playMenu(){

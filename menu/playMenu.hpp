@@ -1,6 +1,6 @@
 #include <vector>
 #include "titleMenu.hpp"
-#include "../scene.hpp"
+#include "../sceneManagement/scene.hpp"
 #include "../dataStructs/tag.hpp"
 
 //Handles the play menu where the user selects what story they want to read at the start or midway through.
