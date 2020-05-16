@@ -7,6 +7,7 @@
 class quickTest{
     private:
         storyMenu * story;                          //Refers to the storyMenu that this menu is connected to.
+        playMenu * play;                            //Only there to track owned tags.
         scene * activeScene;                        //The scene to start the story from.
     public:
         quickTest(storyMenu * stry, scene * active);//Constructs an object of this class that sets the menu that this menu can back connect to.

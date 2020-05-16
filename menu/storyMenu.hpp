@@ -1,5 +1,5 @@
 #include <vector>
-#include "../scene.hpp"
+#include "../sceneManagement/scene.hpp"
 
 //Handles the old story menu that asks teh user which story they want to edit.
 #ifndef OSM_HPP
