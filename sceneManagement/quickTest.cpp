@@ -3,9 +3,9 @@
 #include "quickTest.hpp"
 #include <iostream>
 
-quickTest::quickTest(storyMenu * stry, scene * active){
+quickTest::quickTest(storyMenu * stry, playMenu * ply){
     story = stry;
-    activeScene = active;
+    play = ply;
 }
 
 void quickTest::quit(){
@@ -13,7 +13,7 @@ void quickTest::quit(){
     return;
 }
 
-void quickTest::run(){
+void quickTest::run(scene * activeScene){
         bool userWantsToQuit = false;
         while(!userWantsToQuit){
         int userAction = 0;

@@ -4,6 +4,7 @@
 #include "./menu/titleMenu.hpp"
 #include "./menu/storyMenu.hpp"
 #include "./sceneManagement/scene.hpp"
+#include "./sceneManagement/quickTest.hpp"
 
 int main(){
     //Constructs all the menus.
@@ -12,9 +13,11 @@ int main(){
     story->setParent(make);
     playMenu * play = new playMenu();
     titleMenu * title = new titleMenu(make,play);
+    quickTest * qT = new quickTest(story, play);
     story->setRoot(title);
     make->setParent(title);
     play->setParent(title);
+    story->setQT(qT);
     title->setActive = true;
     scene * bip = new scene();
     //This generates a switch pattern between all the different menus, allowing them all to loop without every having to really share

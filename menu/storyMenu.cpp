@@ -12,14 +12,19 @@ void storyMenu::setParent(makeMenu* mm){
     return;
 }
 
-void storyMenu::backPedal(){
-    setActive = false;
-    make->setActive = true;
+void storyMenu::setRoot(titleMenu * titleM){
+    title = titleM;
     return;
 }
 
-void storyMenu::setRoot(titleMenu * titleM){
-    title = titleM;
+void storyMenu::setQT(quickTest * qt){
+    qT = qt;
+    return;
+}
+
+void storyMenu::backPedal(){
+    setActive = false;
+    make->setActive = true;
     return;
 }
 
@@ -41,8 +46,9 @@ void storyMenu::printMenu(){
     std::cin >> userInput;
         switch(userInput){
         case 1:{
-            //quickTest qT = quickTest(this);
-            //qT.run();
+            /*
+            qT.run();
+            */
             break;
         }
         case 2:{
