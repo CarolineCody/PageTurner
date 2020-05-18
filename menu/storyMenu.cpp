@@ -3,7 +3,8 @@
 #include "storyMenu.hpp"
 #include "makeMenu.hpp"
 
-storyMenu::storyMenu(){
+storyMenu::storyMenu(scene * entry){
+    activeScene = entry;
     return;
 }
 
@@ -46,9 +47,7 @@ void storyMenu::printMenu(){
     std::cin >> userInput;
         switch(userInput){
         case 1:{
-            /*
-            qT.run();
-            */
+            qT.run(activeScene);
             break;
         }
         case 2:{

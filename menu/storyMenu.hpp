@@ -12,9 +12,9 @@ class storyMenu{
     makeMenu* make;                               //References to the makeMenu that is connected to this menu.
     titleMenu* title;                             //References to the titleMenu that is connected to this menu.
     quickTest* qT;                                //References to the quick play tool.
-    std::vector<scene> entries;                   //Stores all scenes within the new story written.
+    scene * activeScene;                          //Stores the first scene of a story.
     public:
-    storyMenu();                                  //Default constructor that finds all relevant user information.
+    storyMenu(scene * entry);                     //Default constructor that finds all relevant user information.
     void setParent(makeMenu* mm);                 //Sets the parent menu of the new story menu.
     void setRoot(titleMenu* titleM);              //Sets the reroute menu to the titleMenu.
     void setQT(quickTest * qt);                   //Sets the quickTest tool that the user can access.
