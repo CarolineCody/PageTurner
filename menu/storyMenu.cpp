@@ -3,8 +3,7 @@
 #include "storyMenu.hpp"
 #include "makeMenu.hpp"
 
-storyMenu::storyMenu(scene * entry){
-    activeScene = entry;
+storyMenu::storyMenu(){
     return;
 }
 
@@ -15,6 +14,11 @@ void storyMenu::setParent(makeMenu* mm){
 
 void storyMenu::setRoot(titleMenu * titleM){
     title = titleM;
+    return;
+}
+
+void storyMenu::setScene(scene * entry){
+    activeScene = entry;
     return;
 }
 
@@ -41,20 +45,43 @@ void storyMenu::printMenu(){
     std::cout << "|                      Edit a Story                    |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cout << "| 1) Read Story                                        |" << std::endl;
-    std::cout << "| 2) Return to Make Menu                               |" << std::endl;
-    std::cout << "| 3) Quit                                              |" << std::endl;
+    std::cout << "| 2) Select Story                                      |" << std::endl;
+    std::cout << "| 3) Return to Make Menu                               |" << std::endl;
+    std::cout << "| 4) Quit                                              |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cin >> userInput;
         switch(userInput){
         case 1:{
-            qT.run(activeScene);
+            qT->run(activeScene);
             break;
         }
         case 2:{
-            backPedal();
+            //Need to do some mass story selection drop down for the user. starting and recieving from main. So retrieval has to be done by main.
+            bool wantToQuit = false;
+            while(!wantToQuit){
+                int entry = 0;
+                for(int c = 0; c < titleScenes.size(); c++){
+                    std::cout << c+1 << ") " << titleScenes[c]->getTitle() << std::endl;
+                }
+                std::cin >> entry;
+                if(entry >= 1 && entry <= titleScenes.size()){
+                    activeScene = titleScenes[entry-1];
+                    wantToQuit = true;
+                    std::cout << "Active scene selected. Returning to \"Story Menu\"" << std::endl;
+                }
+                else{
+                    std::cout << "Invalid Entry." << std::endl;
+                }
+                std::cin.clear();
+                std::cin.ignore();
+            }
             break;
         }
         case 3:{
+            backPedal();
+            break;
+        }
+        case 4:{
             quit();
             break;
         }
