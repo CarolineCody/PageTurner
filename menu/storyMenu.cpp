@@ -3,6 +3,7 @@
 #include "storyMenu.hpp"
 #include "makeMenu.hpp"
 
+//5/20/20
 storyMenu::storyMenu(){
     return;
 }
