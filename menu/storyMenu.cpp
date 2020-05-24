@@ -59,7 +59,7 @@ void storyMenu::printMenu(){
         case 2:{
             //Need to do some mass story selection drop down for the user. starting and recieving from main. So retrieval has to be done by main.
             bool wantToQuit = false;
-            while(!wantToQuit){
+            while(titleScenes.size() > 0 && !wantToQuit){
                 int entry = 0;
                 for(int c = 0; c < titleScenes.size(); c++){
                     std::cout << c+1 << ") " << titleScenes[c]->getTitle() << std::endl;
@@ -75,6 +75,9 @@ void storyMenu::printMenu(){
                 }
                 std::cin.clear();
                 std::cin.ignore();
+            }
+            if(titleScenes.size() == 0){
+                std::cout << "No stories found." << std::endl;
             }
             break;
         }
