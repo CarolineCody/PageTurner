@@ -1,4 +1,5 @@
 #include "../menu/storyMenu.hpp"
+#include "../menu/playMenu.hpp"
 #include "scene.hpp"
 
 //Handles the test play section. This allows the user to quickly test out the scene without having to hop through a bunch of menus.

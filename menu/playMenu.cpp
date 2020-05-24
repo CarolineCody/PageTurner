@@ -72,7 +72,7 @@ void playMenu::printMenu(){
         std::cin >> userAction;
         //Handles a line selection.
         if(!std::cin.fail() && userAction > 0 && userAction <= activeScene.choices.size()){
-            activeScene = activeScene.choices[userAction-1]->scene;
+            activeScene = *activeScene.choices[userAction-1]->linkScene;
             for(int c = 0; c < activeScene.choices[userAction-1]->gives.size(); c++){
                 bool foundSlot = false;
                 for(int r = 0; r < ownedTags->size(); r++){

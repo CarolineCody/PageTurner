@@ -149,6 +149,9 @@ void scene::editText(){
             bool userDoneEditing = false;
             while(!userDoneEditing){
                 userAction = 0;
+                for(int c = 0; c < text.size(); c++){
+                    std::cout << c << ") " << text[c] << std::endl;
+                }
                 std::cout << "========================================================" << std::endl;
                 std::cout << "| What would you like to do with this line?            |" << std::endl;
                 std::cout << "| 1) Add a new line.                                   |" << std::endl;

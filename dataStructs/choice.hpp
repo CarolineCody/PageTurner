@@ -9,7 +9,7 @@ struct choice{
     std::string text;                                  //The text that is printed whenever a choice is presented as part of a scene.
     std::vector<tag> required;                         //List of template vectors that is required for this choice to become visible as part of a scene.
     std::vector<tag> gives;                            //List of all the tags that will be granted to the player upon selecting this choice.
-    scene scene;                                       //The name of the scene this choice will link to when the player makes a choice.
+    scene * linkScene;                                     //The name of the scene this choice will link to when the player makes a choice.
 };
 #endif
 

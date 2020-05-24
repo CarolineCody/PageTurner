@@ -353,7 +353,7 @@ void sceneManager::sceneSelection(){
                 }
                 std::cin >> sceneSelection;
                 if(sceneSelection > 0 && sceneSelection <= scenes.size()){
-                    activeChoice->scene = scenes[sceneSelection-1];
+                    activeChoice->linkScene = &scenes[sceneSelection-1];
                 }
                 else{
                     std::cout << "Invalid scene selected." << std::endl;

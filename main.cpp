@@ -19,7 +19,8 @@ int main(){
     play->setParent(title);
     story->setQT(qT);
     title->setActive = true;
-    scene * bip = new scene();
+    //direct scene selection.
+    //scene * bip = new scene();
     //This generates a switch pattern between all the different menus, allowing them all to loop without every having to really share
     //The objects between them. This is pretty clever but I am sure there are smarter ways of doing this. This is just how my coding
     //monkey brain went about this.
