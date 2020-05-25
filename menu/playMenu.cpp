@@ -21,6 +21,10 @@ void playMenu::printMenu(){
     bool userWantsToQuit = false;
     //Controls what scene is being viewed by the user.
     scene activeScene;
+    if(stories.size()  == 0){
+        std::cout << "No stories available at this time. Please create a story before moving on." << std::endl;
+        return;
+    }
     while(!setActiveStory){
         std::cout << "========================================================" << std::endl;
         std::cout << "|                    Select a Story                    |" << std::endl;

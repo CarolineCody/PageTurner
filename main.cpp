@@ -38,7 +38,7 @@ int main(){
             play->printMenu();
         }
         else{
-            std::cout << "Error! Invalid comupnace has happened. The coding gremlins are at it again!" << std::endl;
+            std::cout << "Error! Invalid computation has happened. The coding gremlins are at it again!" << std::endl;
         }
     }
     std::cout << "Till next time!" << std::endl;

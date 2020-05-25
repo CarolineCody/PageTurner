@@ -27,10 +27,8 @@ void quickTest::run(scene * activeScene){
         for(int c = 0; c < activeScene->choices.size(); c++){
             for(int r = 0; r < play->ownedTags->size(); r++){
                 for(int x = 0; x < activeScene->choices[c]->required.size(); x++){
-                    if(play->ownedTags->operator[](r).name == activeScene->choices[c]->required[x].name){
-                        if(play->ownedTags->operator[](r).amount >= activeScene->choices[c]->required[x].amount){
-                            std::cout << c+1 << ") " << activeScene->choices[c]->text << std::endl;
-                        }
+                    if(play->ownedTags->operator[](r).name == activeScene->choices[c]->required[x].name && play->ownedTags->operator[](r).amount >= activeScene->choices[c]->required[x].amount){
+                        std::cout << c+1 << ") " << activeScene->choices[c]->text << std::endl;
                     }
                 }
             }

@@ -61,6 +61,7 @@ void storyMenu::printMenu(){
             bool wantToQuit = false;
             while(titleScenes.size() > 0 && !wantToQuit){
                 int entry = 0;
+                std::cout << "Scene Selection: Choose the scene you would like your story to start from." << std::endl;
                 for(int c = 0; c < titleScenes.size(); c++){
                     std::cout << c+1 << ") " << titleScenes[c]->getTitle() << std::endl;
                 }
