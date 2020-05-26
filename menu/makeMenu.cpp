@@ -25,7 +25,7 @@ void makeMenu::printMenu(){
     //Prints and proccesses user input.
     int userInput;
     std::cout << "========================================================" << std::endl;
-    std::cout << "|                   Choose an Action                   |" << std::endl;
+    std::cout << "|                       Make Menu                      |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cout << "| 1) Create a New Story                                |" << std::endl;
     std::cout << "| 2) Edit a Premade Story                              |" << std::endl;

@@ -53,7 +53,12 @@ void storyMenu::printMenu(){
     std::cin >> userInput;
         switch(userInput){
         case 1:{
-            qT->run(activeScene);
+            if(!activeScene){
+                std::cout << "No Story Selected. Please select a story first." << std::endl;
+            }
+            else{
+                qT->run(activeScene);
+            }
             break;
         }
         case 2:{
