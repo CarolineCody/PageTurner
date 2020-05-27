@@ -271,7 +271,7 @@ void sceneManager::sceneSelection(){
                 while(!userIsDone){
                     std::cout << "Which choice would you like to change?" << std::endl;
                     for(int c = 0; c < activeScene->choices.size(); c++){
-                        std::cout << c << ") " << activeScene->choices[c] << std::endl;
+                        std::cout << c+1 << ") " << activeScene->choices[c] << std::endl;
                     }
                     //Handles choice check.
                     std::cin >> userChoice;

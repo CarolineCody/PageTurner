@@ -59,12 +59,14 @@ void playMenu::printMenu(){
         //Prints text.
         activeScene.printText();
         //Prints choices.
+        int optionList = 1;
         for(int c = 0; c < activeScene.choices.size(); c++){
             for(int r = 0; r < ownedTags->size(); r++){
                 for(int x = 0; x < activeScene.choices[c]->required.size(); x++){
                     if(ownedTags->operator[](r).name == activeScene.choices[c]->required[x].name){
                         if(ownedTags->operator[](r).amount >= activeScene.choices[c]->required[x].amount){
-                            std::cout << c+1 << ") " << activeScene.choices[c]->text << std::endl;
+                            std::cout << optionList << ") " << activeScene.choices[c]->text << std::endl;
+                            optionList++;
                         }
                     }
                 }
