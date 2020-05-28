@@ -48,10 +48,10 @@ void quickTest::run(scene * activeScene){
                     }
                 }
                 if(!foundSlot){
-                    tag bip;
-                    bip.amount = activeScene->choices[userAction-1]->gives[c].amount;
-                    bip.name = activeScene->choices[userAction-1]->gives[c].name;
-                    play->ownedTags->push_back(bip);
+                    tag newTag;
+                    newTag.amount = activeScene->choices[userAction-1]->gives[c].amount;
+                    newTag.name = activeScene->choices[userAction-1]->gives[c].name;
+                    play->ownedTags->push_back(newTag);
                 }
             }
         }

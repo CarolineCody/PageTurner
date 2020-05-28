@@ -88,10 +88,10 @@ void playMenu::printMenu(){
                     }
                 }
                 if(!foundSlot){
-                    tag bip;
-                    bip.amount = activeScene.choices[userAction-1]->gives[c].amount;
-                    bip.name = activeScene.choices[userAction-1]->gives[c].name;
-                    ownedTags->push_back(bip);
+                    tag createdTag;
+                    createdTag.amount = activeScene.choices[userAction-1]->gives[c].amount;
+                    createdTag.name = activeScene.choices[userAction-1]->gives[c].name;
+                    ownedTags->push_back(createdTag);
                 }
             }
         }
