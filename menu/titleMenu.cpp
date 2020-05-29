@@ -11,6 +11,7 @@ titleMenu::titleMenu(makeMenu* mm, playMenu * pm){
 
 void titleMenu::printMenu(){
     int userInput = 0;
+    //Main menu print.
     std::cout << "========================================================" << std::endl;
     std::cout << "|                 Welcome to PageTurner                |" << std::endl;
     std::cout << "========================================================" << std::endl;
@@ -19,6 +20,7 @@ void titleMenu::printMenu(){
     std::cout << "| 3) Quit                                              |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cin >> userInput;
+    //Prints the menu options.
     switch(userInput){
         case 1:
             setActive = false;

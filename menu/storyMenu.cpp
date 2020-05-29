@@ -5,43 +5,51 @@
 
 //5/20/20
 storyMenu::storyMenu(){
+    //Default constructor for the class.
     return;
 }
 
 void storyMenu::setParent(makeMenu* mm){
+    //Sets the parent of the menu.
     make = mm;
     return;
 }
 
 void storyMenu::setRoot(titleMenu * titleM){
+    //Sets reference to the story menu.
     title = titleM;
     return;
 }
 
 void storyMenu::setScene(scene * entry){
+    //Sets the active scene.
     activeScene = entry;
     return;
 }
 
 void storyMenu::setQT(quickTest * qt){
+    //Establishes the qT.
     qT = qt;
     return;
 }
 
 void storyMenu::backPedal(){
+    //Takes the story back to the makeMenu.
     setActive = false;
     make->setActive = true;
     return;
 }
 
 void storyMenu::returnToMenu(){
+    //Returns to the title menu.
     title->setActive = true;
     setActive = false;
     return;
 }
 
 void storyMenu::printMenu(){
-    int userInput;
+    //Displays the menu;
+    int userInput = 0;
     std::cout << "========================================================" << std::endl;
     std::cout << "|                      Edit a Story                    |" << std::endl;
     std::cout << "========================================================" << std::endl;
@@ -51,6 +59,7 @@ void storyMenu::printMenu(){
     std::cout << "| 4) Quit                                              |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cin >> userInput;
+        //Accessess and processes user input.
         switch(userInput){
         case 1:{
             if(!activeScene){
