@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../sceneManagement/quickTest.hpp"
+#include "../sceneManagement/sceneManager.hpp"
 #include "storyMenu.hpp"
 #include "makeMenu.hpp"
 
@@ -72,28 +73,7 @@ void storyMenu::printMenu(){
         }
         case 2:{
             //Need to do some mass story selection drop down for the user. starting and recieving from main. So retrieval has to be done by main.
-            bool wantToQuit = false;
-            while(titleScenes.size() > 0 && !wantToQuit){
-                int entry = 0;
-                std::cout << "Scene Selection: Choose the scene you would like your story to start from." << std::endl;
-                for(int c = 0; c < titleScenes.size(); c++){
-                    std::cout << c+1 << ") " << titleScenes[c]->getTitle() << std::endl;
-                }
-                std::cin >> entry;
-                if(entry >= 1 && entry <= titleScenes.size()){
-                    activeScene = titleScenes[entry-1];
-                    wantToQuit = true;
-                    std::cout << "Active scene selected. Returning to \"Story Menu\"" << std::endl;
-                }
-                else{
-                    std::cout << "Invalid Entry." << std::endl;
-                }
-                std::cin.clear();
-                std::cin.ignore();
-            }
-            if(titleScenes.size() == 0){
-                std::cout << "No stories found." << std::endl;
-            }
+            sceneManager sceney = new sceneManager;
             break;
         }
         case 3:{
