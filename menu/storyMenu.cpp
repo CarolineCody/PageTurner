@@ -73,7 +73,7 @@ void storyMenu::printMenu(){
         }
         case 2:{
             //Need to do some mass story selection drop down for the user. starting and recieving from main. So retrieval has to be done by main.
-            sceneManager * sceney = new sceneManager();
+            sceneManager * sceney;
             break;
         }
         case 3:{
