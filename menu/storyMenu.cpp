@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "../sceneManagement/quickTest.hpp"
 #include "../sceneManagement/sceneManager.hpp"
 #include "storyMenu.hpp"
@@ -48,6 +49,18 @@ void storyMenu::returnToMenu(){
     return;
 }
 
+void appendScenes(std::vector<scene>& listOfScenes, scene* entry){
+    if(std::find(listOfScenes.begin(), listOfScenes.end(),entry) == listOfScenes.end()){
+            listOfScenes.push_back(*entry);
+    }
+    for(int c = 0; c < entry->choices.size(); c++){
+        if(std::find(listOfScenes.begin(), listOfScenes.end(),entry->choices[c]->linkScene) == listOfScenes.end()){
+            appendScenes(listOfScenes,entry->choices[c]->linkScene);
+        }
+    }
+    return;
+}
+
 void storyMenu::printMenu(){
     //Displays the menu;
     int userInput = 0;
@@ -73,7 +86,40 @@ void storyMenu::printMenu(){
         }
         case 2:{
             //Need to do some mass story selection drop down for the user. starting and recieving from main. So retrieval has to be done by main.
-            sceneManager * sceney;
+            if(titleScenes.size() > 0){
+                bool quit = false;
+                while(!quit){
+                    int input = 0;
+                    std::cout << "========================================================" << std::endl;
+                    std::cout << "|               Please Select a Scene                  |" << std::endl;
+                    std::cout << "========================================================" << std::endl;
+                    for(int c = 0; c < titleScenes.size(); c++){
+                        std::cout << c+1 << ") " << titleScenes[c]->getTitle() << "." << std::endl;
+                    }
+                    std::cout << titleScenes.size()+1 << ") Quit." << std::endl;
+                    std::cin >> input;
+                    std::cin.clear();
+                    std::cin.ignore();
+                    if(input > 0 && input <= titleScenes.size()){
+                        activeScene = titleScenes[input-1];
+                        std::cout << "Active Scene Set." << std::endl;
+                        std::vector<scene> sceneForBook;
+                        sceneManager * bip = new sceneManager();
+                        appendScenes(sceneForBook,activeScene);
+                        bip->setScenes(sceneForBook);
+                        quit =  true;
+                    }
+                    else if(input == titleScenes.size()+1){
+                        std::cout << "Returning to Edit Story Menu" << std::endl;
+                        quit =  true;                        
+                    }
+                }
+                
+            }
+            else{
+                std::cout << "No Scenes Found. Making New Scene." << std::endl;
+
+            }
             break;
         }
         case 3:{

@@ -437,3 +437,7 @@ void sceneManager::tagsManager(){
         };
     }
 }
+
+void sceneManager::setScenes(std::vector<scene> scns){
+    scenes = scns;
+}
