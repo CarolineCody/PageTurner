@@ -107,6 +107,7 @@ void storyMenu::printMenu(){
                         sceneManager * bip = new sceneManager();
                         appendScenes(sceneForBook,activeScene);
                         bip->setScenes(sceneForBook);
+                        bip->sceneSelection();
                         quit =  true;
                     }
                     else if(input == titleScenes.size()+1){
