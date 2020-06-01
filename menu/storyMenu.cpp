@@ -104,14 +104,20 @@ void storyMenu::printMenu(){
                         activeScene = titleScenes[input-1];
                         std::cout << "Active Scene Set." << std::endl;
                         std::vector<scene> sceneForBook;
-                        sceneManager * bip = new sceneManager();
+                        sceneManager * sceneController = new sceneManager();
                         appendScenes(sceneForBook,activeScene);
-                        bip->setScenes(sceneForBook);
-                        bip->sceneSelection();
+                        sceneController->setScenes(sceneForBook);
+                        sceneController->sceneSelection();
                         quit =  true;
                     }
                     else if(input == titleScenes.size()+1){
                         std::cout << "Returning to Edit Story Menu" << std::endl;
+                        sceneManager * sceneController = new sceneManager();
+                        scene * newScene = new scene();
+                        std::vector<scene> scenes;
+                        scenes.push_back(*newScene);
+                        sceneController->setScenes(scenes);
+                        sceneController->sceneSelection();
                         quit =  true;                        
                     }
                 }
