@@ -5,6 +5,10 @@
 #include "../dataStructs/choice.hpp"
 #include "../dataStructs/tag.hpp"
 
+sceneManager::sceneManager(){
+    return;
+}
+
 void sceneManager::sceneSelection(){
     scene * activeScene;
     int sceneSelectionNumber;

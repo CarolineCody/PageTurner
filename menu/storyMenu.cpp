@@ -50,13 +50,18 @@ void storyMenu::returnToMenu(){
 }
 
 void appendScenes(std::vector<scene>& listOfScenes, scene* entry){
-    if(std::find(listOfScenes.begin(), listOfScenes.end(),entry) == listOfScenes.end()){
-            listOfScenes.push_back(*entry);
+    //error is here!
+    bool found = false;
+    for(int c = 0; c < listOfScenes.size(); c++){
+        if(entry->getTitle() == listOfScenes[c].getTitle()){
+            found = true;
+        }
+    }
+    if(!found){
+        listOfScenes.push_back(*entry);
     }
     for(int c = 0; c < entry->choices.size(); c++){
-        if(std::find(listOfScenes.begin(), listOfScenes.end(),entry->choices[c]->linkScene) == listOfScenes.end()){
-            appendScenes(listOfScenes,entry->choices[c]->linkScene);
-        }
+        appendScenes(listOfScenes,entry->choices[c]->linkScene);
     }
     return;
 }
