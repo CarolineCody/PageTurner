@@ -11,6 +11,7 @@ class scene{
         std::vector<std::string> text;      //The actual text that is part of the scene and constitutes what the player is reacting to.
     public:
         scene();                           //Handles scene construction including building the title, and setting the text.
+        void editScene();                  //Handles scene construction with set features such as name and relevant information.
         void addChoice(choice * newChoice);//Handles new choice creation and adding it into the choices vector.
         void removeChoice(std::string choiceName);//Handles removing a given choice within name.
         choice * getChoice(std::string choiceName);//Returns a choice for manipulation and any changes necessary.

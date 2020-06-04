@@ -5,6 +5,10 @@
 #include "../dataStructs/choice.hpp"
 
 scene::scene(){
+    return;
+}
+
+void scene::editScene(){
     std::string userInput;
     //Sets the name and text within a scene. Choices will have to be implemented seperately.
     //Half for ease of diverse implementation and half because I am to tired to do more now.
@@ -13,6 +17,7 @@ scene::scene(){
     std::cin.clear();
     setTitle(userInput);
     editText();
+    return;
 }
 
 void scene::addChoice(choice * newChoice){

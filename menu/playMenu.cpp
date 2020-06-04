@@ -20,7 +20,7 @@ void playMenu::printMenu(){
     //Handes if the user wants to quit or not.
     bool userWantsToQuit = false;
     //Controls what scene is being viewed by the user.
-    //scene activeScene; THIS IS THE FUCKING BUG!!!!
+    scene activeScene;
     if(stories.size()  == 0){
         std::cout << "No stories available at this time. Please create a story before moving on." << std::endl;
         backPedal();
@@ -39,7 +39,7 @@ void playMenu::printMenu(){
         std::cin >> userInput;
         if(userInput > 0 && userInput <= stories.size()){
             setActiveStory = true;
-            //activeScene = stories[userInput-1];
+            activeScene = stories[userInput-1];
         }
         else if(userInput == stories.size()+2){
             backPedal();
@@ -58,10 +58,9 @@ void playMenu::printMenu(){
         //std::cout << activeScene.getTitle() << std::endl;
         std::cout << "========================================================" << std::endl;
         //Prints text.
-        //activeScene.printText();
+        activeScene.printText();
         //Prints choices.
         int optionList = 1;
-        /*
         for(int c = 0; c < activeScene.choices.size(); c++){
             for(int r = 0; r < ownedTags->size(); r++){
                 for(int x = 0; x < activeScene.choices[c]->required.size(); x++){
@@ -113,7 +112,6 @@ void playMenu::printMenu(){
                 break;
             }
         };
-        */
     }
     return;
 }
