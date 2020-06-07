@@ -129,8 +129,8 @@ void storyMenu::printMenu(){
                 
             }
             else{
+                //Handles scene return.
                 std::cout << "No Scenes Found. Making New Scene." << std::endl;
-
             }
             break;
         }
