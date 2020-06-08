@@ -131,6 +131,9 @@ void storyMenu::printMenu(){
             else{
                 //Handles scene return.
                 std::cout << "No Scenes Found. Making New Scene." << std::endl;
+                scene * newScene = new scene();
+                newScene->editScene();
+                titleScenes.push_back(newScene);
             }
             break;
         }
@@ -153,6 +156,24 @@ void storyMenu::printMenu(){
 }
 
 void storyMenu::quit(){
-    setActive = false;
+    bool notDone = true;
+    while(notDone){
+        std::cout << "Are you sure you want to close this whole program? (y/n)" << std::endl;
+        char input;
+        std::cin >> input;
+        switch(input){
+            case 'y':{
+                notDone = false;
+                setActive = false;
+                break;
+            }
+            case 'n':{
+                notDone = false;
+                break;
+            }
+        };
+        std::cin.ignore();
+        std::cin.clear();
+    }
     return;
 }
