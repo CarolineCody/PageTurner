@@ -12,9 +12,10 @@ void scene::editScene(){
     std::string userInput;
     //Sets the name and text within a scene. Choices will have to be implemented seperately.
     //Half for ease of diverse implementation and half because I am to tired to do more now.
+    std::cin.clear();
+    std::cin.ignore();
     std::cout << "New scene created. What would you like to call this scene?" << std::endl;
     std::getline(std::cin, userInput);
-    std::cin.clear();
     setTitle(userInput);
     editText();
     return;

@@ -132,6 +132,7 @@ void storyMenu::printMenu(){
                 //Handles scene return.
                 std::cout << "No Scenes Found. Making New Scene." << std::endl;
                 scene * newScene = new scene();
+                std::cin.clear();
                 newScene->editScene();
                 titleScenes.push_back(newScene);
             }
@@ -150,8 +151,6 @@ void storyMenu::printMenu(){
             std::cin.clear();
         }
     };
-    std::cin.ignore();
-    std::cin.clear();
     return;
 }
 
@@ -171,9 +170,12 @@ void storyMenu::quit(){
                 notDone = false;
                 break;
             }
+            default:{
+                std::cin.clear();
+                std::cin.ignore();
+                break;
+            }
         };
-        std::cin.ignore();
-        std::cin.clear();
     }
     return;
 }
