@@ -117,8 +117,28 @@ void playMenu::printMenu(){
 }
 
 void playMenu::quit(){
-    //Sets the scene inactive with no successor so it will get shut down.
-    setActive = false;
+        bool notDone = true;
+    while(notDone){
+        std::cout << "Are you sure you want to close this whole program? (y/n)" << std::endl;
+        char input;
+        std::cin >> input;
+        switch(input){
+            case 'y':{
+                notDone = false;
+                setActive = false;
+                break;
+            }
+            case 'n':{
+                notDone = false;
+                break;
+            }
+            default:{
+                std::cin.clear();
+                std::cin.ignore();
+                break;
+            }
+        };
+    }
     return;
 }
 

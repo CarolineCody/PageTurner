@@ -9,7 +9,28 @@ quickTest::quickTest(storyMenu * stry, playMenu * ply){
 }
 
 void quickTest::quit(){
-    story->setActive = false;
+    bool notDone = true;
+    while(notDone){
+        std::cout << "Are you sure you want to close this whole program? (y/n)" << std::endl;
+        char input;
+        std::cin >> input;
+        switch(input){
+            case 'y':{
+                notDone = false;
+                story->setActive = false;
+                break;
+            }
+            case 'n':{
+                notDone = false;
+                break;
+            }
+            default:{
+                std::cin.clear();
+                std::cin.ignore();
+                break;
+            }
+        };
+    }
     return;
 }
 
