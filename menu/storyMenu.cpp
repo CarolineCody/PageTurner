@@ -3,7 +3,6 @@
 #include "../sceneManagement/quickTest.hpp"
 #include "../sceneManagement/sceneManager.hpp"
 #include "storyMenu.hpp"
-#include "makeMenu.hpp"
 
 //5/20/20
 storyMenu::storyMenu(){
@@ -11,15 +10,9 @@ storyMenu::storyMenu(){
     return;
 }
 
-void storyMenu::setParent(makeMenu* mm){
+void storyMenu::setParent(titleMenu* mm){
     //Sets the parent of the menu.
-    make = mm;
-    return;
-}
-
-void storyMenu::setRoot(titleMenu * titleM){
-    //Sets reference to the story menu.
-    title = titleM;
+    title = mm;
     return;
 }
 
@@ -38,14 +31,7 @@ void storyMenu::setQT(quickTest * qt){
 void storyMenu::backPedal(){
     //Takes the story back to the makeMenu.
     setActive = false;
-    make->setActive = true;
-    return;
-}
-
-void storyMenu::returnToMenu(){
-    //Returns to the title menu.
     title->setActive = true;
-    setActive = false;
     return;
 }
 
@@ -74,7 +60,7 @@ void storyMenu::printMenu(){
     std::cout << "========================================================" << std::endl;
     std::cout << "| 1) Read Story                                        |" << std::endl;
     std::cout << "| 2) Select Story                                      |" << std::endl;
-    std::cout << "| 3) Return to Make Menu                               |" << std::endl;
+    std::cout << "| 3) Return to Main Menu                               |" << std::endl;
     std::cout << "| 4) Quit                                              |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cin >> userInput;

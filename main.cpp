@@ -1,5 +1,4 @@
 #include <iostream>
-#include "./menu/makeMenu.hpp"
 #include "./menu/playMenu.hpp"
 #include "./menu/titleMenu.hpp"
 #include "./menu/storyMenu.hpp"
@@ -9,14 +8,10 @@
 int main(){
     //Constructs all the menus.
     storyMenu * story = new storyMenu();
-    makeMenu * make = new makeMenu(story);
-    story->setParent(make);
     playMenu * play = new playMenu();
-    titleMenu * title = new titleMenu(make,play);
+    titleMenu * title = new titleMenu(story,play);
     quickTest * qT = new quickTest(story, play);
-    story->setRoot(title);
-    make->setParent(title);
-    play->setParent(title);
+    story->setParent(title);
     story->setQT(qT);
     title->setActive = true;
     //direct scene selection.
@@ -24,15 +19,12 @@ int main(){
     //This generates a switch pattern between all the different menus, allowing them all to loop without every having to really share
     //The objects between them. This is pretty clever but I am sure there are smarter ways of doing this. This is just how my coding
     //monkey brain went about this.
-    while( title->setActive || story->setActive || make->setActive || play->setActive){
+    while( title->setActive || story->setActive || play->setActive){
         if(title->setActive){
             title->printMenu();
         }
         else if(story->setActive){
             story->printMenu();
-        }
-        else if(make->setActive){
-            make->printMenu();
         }
         else if(play->setActive){
             play->printMenu();

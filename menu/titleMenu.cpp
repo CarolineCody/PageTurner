@@ -1,10 +1,9 @@
 #include <iostream>
 #include "titleMenu.hpp"
-#include "makeMenu.hpp"
 #include "playMenu.hpp"
 
-titleMenu::titleMenu(makeMenu* mm, playMenu * pm){
-    make = mm;
+titleMenu::titleMenu(storyMenu* sty, playMenu * pm){
+    story = sty;
     play = pm;
     setActive = true;
 }
@@ -24,7 +23,7 @@ void titleMenu::printMenu(){
     switch(userInput){
         case 1:
             setActive = false;
-            make->setActive = true;
+            story->setActive = true;
             break;
         case 2:
             setActive = false;
