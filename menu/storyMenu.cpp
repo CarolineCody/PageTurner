@@ -60,8 +60,9 @@ void storyMenu::printMenu(){
     std::cout << "========================================================" << std::endl;
     std::cout << "| 1) Read Story                                        |" << std::endl;
     std::cout << "| 2) Select Story                                      |" << std::endl;
-    std::cout << "| 3) Return to Main Menu                               |" << std::endl;
-    std::cout << "| 4) Quit                                              |" << std::endl;
+    std::cout << "| 3) Make a New Story                                  |" << std::endl;
+    std::cout << "| 4) Return to Main Menu                               |" << std::endl;
+    std::cout << "| 5) Quit                                              |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cin >> userInput;
         //Accessess and processes user input.
@@ -125,10 +126,17 @@ void storyMenu::printMenu(){
             break;
         }
         case 3:{
+            std::cout << "Making New Scene." << std::endl;
+            scene * newScene = new scene();
+            std::cin.clear();
+            newScene->editScene();
+            titleScenes.push_back(newScene);
+        }
+        case 4:{
             backPedal();
             break;
         }
-        case 4:{
+        case 5:{
             quit();
             break;
         }
