@@ -104,15 +104,6 @@ void storyMenu::printMenu(){
                     }
                     else if(input == titleScenes.size()+1){
                         std::cout << "Returning to Edit Story Menu" << std::endl;
-                        /*
-                        What in the fresh heck is this....
-                        sceneManager * sceneController = new sceneManager();
-                        scene * newScene = new scene();
-                        std::vector<scene> scenes;
-                        scenes.push_back(*newScene);
-                        sceneController->setScenes(scenes);
-                        sceneController->sceneSelection();
-                        */
                         quit =  true;                        
                     }
                 }
