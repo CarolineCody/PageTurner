@@ -13,6 +13,7 @@ int main(){
     quickTest * qT = new quickTest(story, play);
     story->setParent(title);
     story->setQT(qT);
+    play->setParent(title);
     title->setActive = true;
     //direct scene selection.
     //scene * bip = new scene();
