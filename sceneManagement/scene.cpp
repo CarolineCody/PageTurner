@@ -167,7 +167,7 @@ void scene::editText(){
                 std::cout << "| 1) Add a new line.                                   |" << std::endl;
                 std::cout << "| 2) Delete this line.                                 |" << std::endl;
                 std::cout << "| 3) Change this line.                                 |" << std::endl;
-                std::cout << "| 4) Quit.                                             |" << std::endl;
+                std::cout << "| 4) Return back to line selection.                    |" << std::endl;
                 std::cout << "========================================================" << std::endl;
                 std::cin >> userAction;
                 std::cin.clear();
