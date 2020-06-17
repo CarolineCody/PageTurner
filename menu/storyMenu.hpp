@@ -19,7 +19,8 @@ class storyMenu{
     void setQT(quickTest * qt);                   //Sets the quickTest tool that the user can access.
     void backPedal();                             //Sets the active menu to the makeMenu.
     void returnToMenu();                          //Sets the active menu to the titleMenu.
-    void printMenu();                             //Prints out the menu and its prompts for this menu.
+    std::vector<scene *> printMenu();             //Prints out the menu and its prompts for this menu.
+    void setScenes(std::vector<scene *> scenes);  //Changes the scenes within the program.
     void quit();                                  //Just quits the program AFTER SAVIING ALL THE WORK AS A OLDSTORY MENU.
     bool setActive;                               //Declares this menu as the active area that the user is interacting with.
 };

@@ -52,7 +52,7 @@ void appendScenes(std::vector<scene>& listOfScenes, scene* entry){
     return;
 }
 
-void storyMenu::printMenu(){
+std::vector<scene *> storyMenu::printMenu(){
     //Displays the menu;
     int userInput = 0;
     std::cout << "========================================================" << std::endl;
@@ -139,6 +139,11 @@ void storyMenu::printMenu(){
             std::cin.clear();
         }
     };
+    return titleScenes;
+}
+
+void storyMenu::setScenes(std::vector<scene *> scenes){
+    titleScenes = scenes;
     return;
 }
 

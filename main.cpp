@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "./menu/playMenu.hpp"
 #include "./menu/titleMenu.hpp"
 #include "./menu/storyMenu.hpp"
@@ -11,6 +12,7 @@ int main(){
     playMenu * play = new playMenu();
     titleMenu * title = new titleMenu(story,play);
     quickTest * qT = new quickTest(story, play);
+    std::vector<scene *> scenes;
     story->setParent(title);
     story->setQT(qT);
     play->setParent(title);
@@ -25,10 +27,12 @@ int main(){
             title->printMenu();
         }
         else if(story->setActive){
-            story->printMenu();
+            scenes = story->printMenu();
+            story->setScenes(scenes);
         }
         else if(play->setActive){
-            play->printMenu();
+            scenes = play->printMenu();
+            play->setScenes(scenes);
         }
         else{
             std::cout << "Error! Invalid computation has happened. The coding gremlins are at it again!" << std::endl;
