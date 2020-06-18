@@ -18,7 +18,7 @@ class playMenu{
     void backPedal();                               //Access the menu that came before this menu and sets that menu to the active menu.
     void quit();                                    //Closes the program and saves users progress.
     bool setActive;                                 //Declares this menu as the active area that the user is interacting with.
-    void setScenes(std::vector<scene *> scenes);    //Changes the scenes within the program.
+    void setScenes(std::vector<scene *> scenes);    //Changes the scenes within the program declaration and call.
     std::vector<tag>* ownedTags;                    //Stored reference to the users tags.
 };
 #endif
