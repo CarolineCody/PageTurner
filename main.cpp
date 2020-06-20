@@ -23,16 +23,16 @@ int main(){
     //The objects between them. This is pretty clever but I am sure there are smarter ways of doing this. This is just how my coding
     //monkey brain went about this.
     while( title->setActive || story->setActive || play->setActive){
+        story->setScenes(scenes);
+        play->setScenes(scenes);
         if(title->setActive){
             title->printMenu();
         }
         else if(story->setActive){
             scenes = story->printMenu();
-            story->setScenes(scenes);
         }
         else if(play->setActive){
             scenes = play->printMenu();
-            play->setScenes(scenes);
         }
         else{
             std::cout << "Error! Invalid computation has happened. The coding gremlins are at it again!" << std::endl;
