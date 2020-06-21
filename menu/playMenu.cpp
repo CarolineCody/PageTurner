@@ -31,25 +31,29 @@ std::vector<scene *> playMenu::printMenu(){
         std::cout << "|                    Select a Story                    |" << std::endl;
         std::cout << "========================================================" << std::endl;
         for(int c = 0; c < stories.size(); c++){
-            std::cout << "| " << c+1 << ")" << stories[c]->getTitle() << std::endl;
+            std::cout << "| " << c+1 << ") " << stories[c]->getTitle() << std::endl;
         }
-        std::cout << "| " << stories.size()+2 << ") Return to Title Screen                            |" << std::endl;
-        std::cout << "| " << stories.size()+3 << ") Quit                                              |" << std::endl;
+        std::cout << "| " << stories.size()+1 << ") Return to Title Screen                            |" << std::endl;
+        std::cout << "| " << stories.size()+2 << ") Quit                                              |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cin >> userInput;
         if(userInput > 0 && userInput <= stories.size()){
             setActiveStory = true;
             activeScene = stories[userInput-1];
         }
-        else if(userInput == stories.size()+2){
+        else if(userInput == stories.size()+1){
             backPedal();
         }
-        else if(userInput == stories.size()+3){
+        else if(userInput == stories.size()+2){
             quit();
         }
-        std::cin.ignore();
-        std::cin.clear();
+        else{
+            std::cin.ignore();
+            std::cin.clear();
+        }
     }
+    std::cin.ignore();
+    std::cin.clear();
     //Once a valid scene is found, the function then generates a secondary menu that prints the title, the choices, and its text.
     while(!userWantsToQuit && setActiveStory){
         int userAction = 0;
