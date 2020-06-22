@@ -46,6 +46,9 @@ std::vector<scene *> playMenu::printMenu(){
         }
         else if(userInput == stories.size()+2){
             quit();
+            if(!setActive){
+                return stories;
+            }
         }
         else{
             std::cin.ignore();
@@ -126,7 +129,7 @@ void playMenu::setScenes(std::vector<scene *> scenes){
 }
 
 void playMenu::quit(){
-        bool notDone = true;
+    bool notDone = true;
     while(notDone){
         std::cout << "Are you sure you want to close this whole program? (y/n)" << std::endl;
         char input;
@@ -142,8 +145,8 @@ void playMenu::quit(){
                 break;
             }
             default:{
-                std::cin.clear();
                 std::cin.ignore();
+                std::cin.clear();
                 break;
             }
         };
