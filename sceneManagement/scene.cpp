@@ -141,8 +141,8 @@ void scene::editText(){
         std::cout << "========================================================" << std::endl;
         std::cout << "| Select a line you would like to manipulate.          |" << std::endl;
         if(text.size() == 0){
-            std::cout << "| If there are no lines as of present, please enter|" << std::endl;
-            std::cout << "| any number other than -1 to start editing.       |" << std::endl;
+            std::cout << "| If there are no lines as of present, please enter    |" << std::endl;
+            std::cout << "| any number other than -1 to start editing.           |" << std::endl;
         }
         std::cout << "| Or enter -1 to quit.                                 |" << std::endl;
         std::cout << "| Line #: ";
