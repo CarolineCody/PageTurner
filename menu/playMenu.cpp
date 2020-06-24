@@ -62,7 +62,7 @@ std::vector<scene *> playMenu::printMenu(){
         int userAction = 0;
         //Prints title.
         std::cout << "========================================================" << std::endl;
-        //std::cout << activeScene.getTitle() << std::endl;
+        std::cout << activeScene->getTitle() << std::endl;
         std::cout << "========================================================" << std::endl;
         //Prints text.
         activeScene->printText();
