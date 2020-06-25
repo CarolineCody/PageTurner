@@ -88,23 +88,34 @@ std::vector<scene *> storyMenu::printMenu(){
                     for(int c = 0; c < titleScenes.size(); c++){
                         std::cout << c+1 << ") " << titleScenes[c]->getTitle() << "." << std::endl;
                     }
-                    std::cout << titleScenes.size()+1 << ") Quit." << std::endl;
+                    std::cout << titleScenes.size()+1 << ") Edit Selected Scene." << std::endl;
+                    std::cout << titleScenes.size()+2 << ") Quit." << std::endl;
                     std::cin >> input;
                     std::cin.clear();
                     std::cin.ignore();
                     if(input > 0 && input <= titleScenes.size()){
                         activeScene = titleScenes[input-1];
-                        std::cout << "Active Scene Set." << std::endl;
-                        std::vector<scene> sceneForBook;
-                        sceneManager * sceneController = new sceneManager();
-                        appendScenes(sceneForBook,activeScene);
-                        sceneController->setScenes(sceneForBook);
-                        sceneController->sceneSelection();
-                        quit =  true;
+                        std::cout << "Active scene set to " << titleScenes[input-1]->getTitle() << " ." << std::endl;
                     }
                     else if(input == titleScenes.size()+1){
-                        std::cout << "Returning to Edit Story Menu" << std::endl;
+                        if(!activeScene){
+                            std::cout << "No scene selected, please choose a scene before editing." << std::endl;
+                        }
+                        else{
+                            std::vector<scene> sceneForBook;
+                            sceneManager * sceneController = new sceneManager();
+                            appendScenes(sceneForBook,activeScene);
+                            sceneController->setScenes(sceneForBook);
+                            sceneController->sceneSelection();
+                            quit =  true;
+                        }
+                    }
+                    else if(input == titleScenes.size()+2){
+                        std::cout << "Returning to Edit Story Menu." << std::endl;
                         quit =  true;                        
+                    }
+                    else{
+                        std::cout << "Invalid input." << std::endl;
                     }
                 }
                 

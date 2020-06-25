@@ -6,7 +6,6 @@
 #include "../dataStructs/tag.hpp"
 
 sceneManager::sceneManager(){
-    //need to find a way to incorperate a sceneManager somwhere.
     return;
 }
 

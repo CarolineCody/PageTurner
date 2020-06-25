@@ -21,6 +21,6 @@ class scene{
         void editText();                   //Really messy and hazerdous menu to both my own and everyones health. Manages adding new text
                                            //Removing old text, and even insert text dead in the middle of other text.
         void printText();                  //Prints all text in file one line at a time.
-        std::vector<choice *> choices;      //Contains the list of choices that the player can select.
+        std::vector<choice *> choices;     //Contains the list of choices that the player can select.
 };
 #endif
