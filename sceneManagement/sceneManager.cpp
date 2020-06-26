@@ -50,6 +50,10 @@ void sceneManager::sceneSelection(){
         std::cin >> userActionChoice;
         switch(userActionChoice){
             case 1:{
+                if(activeScene->choices.size() == 0){
+                    std::cout << "No choices available, therefore no tags can be added at this time." << std::endl;
+                    break;
+                }
                 int choiceSelection = 0;
                 bool doneMakingChoice;
                 choice * activeChoice;
