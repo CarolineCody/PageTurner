@@ -21,15 +21,19 @@ std::vector<scene *> playMenu::printMenu(){
     bool userWantsToQuit = false;
     //Controls what scene is being viewed by the user.
     scene * activeScene;
+    //Handles error detection of not stories presents and therefore just returns to the prior menu.
     if(stories.size()  == 0){
         std::cout << "No stories available at this time. Please create a story before moving on." << std::endl;
         backPedal();
         return stories;
     }
+    //Loops until a valid input is found.
     while(!setActiveStory){
+        //Prints menu.
         std::cout << "========================================================" << std::endl;
         std::cout << "|                    Select a Story                    |" << std::endl;
         std::cout << "========================================================" << std::endl;
+        //Prints the titles of stories that is the start of each narative.
         for(int c = 0; c < stories.size(); c++){
             std::cout << "| " << c+1 << ") " << stories[c]->getTitle() << std::endl;
         }
@@ -37,13 +41,16 @@ std::vector<scene *> playMenu::printMenu(){
         std::cout << "| " << stories.size()+2 << ") Quit                                              |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cin >> userInput;
+        //Handles selection of a line.
         if(userInput > 0 && userInput <= stories.size()){
             setActiveStory = true;
             activeScene = stories[userInput-1];
         }
+        //Handles leaving the play menu.
         else if(userInput == stories.size()+1){
             backPedal();
         }
+        //Handles quiting procedures.
         else if(userInput == stories.size()+2){
             quit();
             if(!setActive){

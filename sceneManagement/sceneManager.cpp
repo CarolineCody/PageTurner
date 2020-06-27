@@ -47,6 +47,7 @@ void sceneManager::sceneSelection(){
         std::cout << "| 6) Edit Scene text.                                  |" << std::endl;
         std::cout << "| 7) Set the scene that a choice connects to.          |" << std::endl;
         std::cout << "| 8) Quit.                                             |" << std::endl;
+        std::cout << "========================================================" << std::endl;
         std::cin >> userActionChoice;
         switch(userActionChoice){
             case 1:{
