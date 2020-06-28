@@ -57,6 +57,7 @@ std::vector<scene *> playMenu::printMenu(){
                 return stories;
             }
         }
+        //Disregards content if nothing valid is found.
         else{
             std::cin.ignore();
             std::cin.clear();
@@ -91,7 +92,7 @@ std::vector<scene *> playMenu::printMenu(){
         std::cout << "Type -2 to go back to the story selection menu." << std::endl;
         std::cout << "Type -3 to go back to the main menu." << std::endl;
         std::cin >> userAction;
-        //Handles a line selection.
+        //Handles a line selection and tags/ choices.
         if(!std::cin.fail() && userAction > 0 && userAction <= activeScene->choices.size()){
             activeScene = activeScene->choices[userAction-1]->linkScene;
             for(int c = 0; c < activeScene->choices[userAction-1]->gives.size(); c++){
@@ -131,16 +132,20 @@ std::vector<scene *> playMenu::printMenu(){
 }
 
 void playMenu::setScenes(std::vector<scene *> scenes){
+    //Sets the list of available scenes into the set passed in via vector scenes.
     stories = scenes;
     return;
 }
 
 void playMenu::quit(){
     bool notDone = true;
+    //Loops until the user selects yes or no.
     while(notDone){
+        //Asks the user what they want to do.
         std::cout << "Are you sure you want to close this whole program? (y/n)" << std::endl;
         char input;
         std::cin >> input;
+        //Quits the program if y is selected, n the user does not quit, and else the sequence is stopped.
         switch(input){
             case 'y':{
                 notDone = false;

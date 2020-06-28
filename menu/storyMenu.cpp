@@ -36,16 +36,18 @@ void storyMenu::backPedal(){
 }
 
 void appendScenes(std::vector<scene>& listOfScenes, scene* entry){
-    //error is here!
+    //Searches for and attache a scene to a list of give scenes.
     bool found = false;
     for(int c = 0; c < listOfScenes.size(); c++){
         if(entry->getTitle() == listOfScenes[c].getTitle()){
             found = true;
         }
     }
+    //Checks to see if the scene was found, it it is not, it is just added to the listOfScenes.
     if(!found){
         listOfScenes.push_back(*entry);
     }
+    //Then the system loops for each of the other linked scenes.
     for(int c = 0; c < entry->choices.size(); c++){
         appendScenes(listOfScenes,entry->choices[c]->linkScene);
     }
@@ -81,6 +83,7 @@ std::vector<scene *> storyMenu::printMenu(){
             if(titleScenes.size() > 0){
                 bool quit = false;
                 while(!quit){
+                    //Manages a new scene.
                     int input = 0;
                     std::cout << "========================================================" << std::endl;
                     std::cout << "|               Please Select a Scene                  |" << std::endl;
@@ -88,15 +91,18 @@ std::vector<scene *> storyMenu::printMenu(){
                     for(int c = 0; c < titleScenes.size(); c++){
                         std::cout << c+1 << ") " << titleScenes[c]->getTitle() << "." << std::endl;
                     }
+                    //Gives user quiting options.
                     std::cout << titleScenes.size()+1 << ") Edit Selected Scene." << std::endl;
                     std::cout << titleScenes.size()+2 << ") Quit." << std::endl;
                     std::cin >> input;
                     std::cin.clear();
                     std::cin.ignore();
+                    //Handles scene options.
                     if(input > 0 && input <= titleScenes.size()){
                         activeScene = titleScenes[input-1];
                         std::cout << "Active scene set to " << titleScenes[input-1]->getTitle() << " ." << std::endl;
                     }
+                    //Handles new scene creation.
                     else if(input == titleScenes.size()+1){
                         if(!activeScene){
                             std::cout << "No scene selected, please choose a scene before editing." << std::endl;
@@ -110,10 +116,12 @@ std::vector<scene *> storyMenu::printMenu(){
                             quit =  true;
                         }
                     }
+                    //Handles returning to the edit story menu.
                     else if(input == titleScenes.size()+2){
                         std::cout << "Returning to Edit Story Menu." << std::endl;
                         quit =  true;                        
                     }
+                    //Handles error case.
                     else{
                         std::cout << "Invalid input." << std::endl;
                     }
@@ -121,7 +129,7 @@ std::vector<scene *> storyMenu::printMenu(){
                 
             }
             else{
-                //Handles scene return.
+                //Handles the case where a scene could not be made.
                 std::cout << "No Scenes Found. Making New Scene." << std::endl;
                 scene * newScene = new scene();
                 std::cin.clear();
@@ -131,6 +139,7 @@ std::vector<scene *> storyMenu::printMenu(){
             break;
         }
         case 3:{
+            //Creates a new scene for the user to manipulate.
             std::cout << "Making New Scene." << std::endl;
             scene * newScene = new scene();
             std::cin.clear();
@@ -138,14 +147,18 @@ std::vector<scene *> storyMenu::printMenu(){
             titleScenes.push_back(newScene);
         }
         case 4:{
+            //Handles returning to prior menu.
             backPedal();
             break;
         }
         case 5:{
+            //Handles leaving.
             quit();
             break;
         }
         default:{
+            //Clears content and ignores it otherwise.
+            std::cout << "Invalid Input." << std::endl;
             std::cin.ignore();
             std::cin.clear();
         }
@@ -154,12 +167,14 @@ std::vector<scene *> storyMenu::printMenu(){
 }
 
 void storyMenu::setScenes(std::vector<scene *> scenes){
+    //Sets the scene that can be manipulated by the user.
     titleScenes = scenes;
     return;
 }
 
 void storyMenu::quit(){
     bool notDone = true;
+    //Manages quiting conditions until the user types in a 'y' to quit or a 'n' to stay in the program. Otherwise the system just loops them.
     while(notDone){
         std::cout << "Are you sure you want to close this whole program? (y/n)" << std::endl;
         char input;
