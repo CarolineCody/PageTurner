@@ -4,26 +4,34 @@
 #include <iostream>
 
 quickTest::quickTest(storyMenu * stry, playMenu * ply){
+    //Assigns the story and play feature that the program can return to.
     story = stry;
     play = ply;
 }
 
 void quickTest::quit(){
+    //Determines when a valid selection has been made.
     bool notDone = true;
+    //Loops until the user wants to quit.
     while(notDone){
+        //Prompts user for action to determine next action.
         std::cout << "Are you sure you want to close this whole program? (y/n)" << std::endl;
         char input;
         std::cin >> input;
+        //Processes input.
         switch(input){
+            //Ends program.
             case 'y':{
                 notDone = false;
                 story->setActive = false;
                 break;
             }
+            //Keeps running program.
             case 'n':{
                 notDone = false;
                 break;
             }
+            //Clears input otherwise.
             default:{
                 std::cin.clear();
                 std::cin.ignore();
