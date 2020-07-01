@@ -36,6 +36,7 @@ void scene::addChoice(choice * newChoice){
                 std::cout << "Duplicate entry has been found." <<std::endl;
                 std::cout <<"Would you like to replace the old copy with this one? (y/n)" << std::endl;
                 std::cin >> userChoice;
+                //Handles save conflict resolution.
                 switch(userChoice){
                     case 'y':{
                         choices.erase(choices.begin()+c);
@@ -72,7 +73,7 @@ void scene::removeChoice(std::string choiceName){
             //Keeps track for the for loop if a valid choice was selected.
             bool userChoiceMade = false;
             while(!userChoiceMade){
-                //Keeps track of user selection.
+                //Keeps track of user selection and conflict resolution.
                 char userChoice;
                 std::cout << "Duplicate entry has been found." <<std::endl;
                 std::cout <<"Would you like to replace the old copy with this one? (y/n)" << std::endl;
@@ -104,6 +105,7 @@ void scene::removeChoice(std::string choiceName){
 
 choice * scene::getChoice(std::string choiceName){
     choice * foundChoice = NULL;
+    //Finds a choice by iterating through all available choices.
     for(int c = 0; c < choices.size(); c++){
         if(choiceName == choices[c]->text){
             foundChoice = choices[c];
@@ -113,10 +115,12 @@ choice * scene::getChoice(std::string choiceName){
 }
 
 std::string scene::getTitle(){
+    //Gets the title.
     return title;
 }
 
 void scene::setTitle(std::string newTitle){
+    //Assigns and notifies the user what the new title is.
     title = newTitle;
     std::cout << "Title has been set to \"" << newTitle << "\"." << std::endl;
     return;
@@ -237,6 +241,7 @@ void scene::editText(){
 }
 
 void scene::printText(){
+    //Prints out the text visible to to user.
     for(int c = 0; c < text.size(); c++){
         std::cout << text[c] << std::endl;
     }
