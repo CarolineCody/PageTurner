@@ -22,6 +22,7 @@ void sceneManager::sceneSelection(){
         std::cout << "|" << c+1 << ") " << scenes[c].getTitle() << std::endl;
     }
     while(!validActionTaken){
+        //Loops until the user makes a valid selection.
         std::cout << "Enter in the number of the scene you would like to activly edit." << std::endl;
         std::cin >> sceneSelectionNumber;
         if(sceneSelectionNumber > 0 && sceneSelectionNumber <= scenes.size()){
@@ -51,6 +52,7 @@ void sceneManager::sceneSelection(){
         std::cin >> userActionChoice;
         switch(userActionChoice){
             case 1:{
+                //Handles case where the file has nothing to show.
                 if(activeScene->choices.size() == 0){
                     std::cout << "No choices available, therefore no tags can be added at this time." << std::endl;
                     break;
@@ -76,6 +78,7 @@ void sceneManager::sceneSelection(){
                     for(int c = 0; c< tags.size(); c++){
                         std::cout << c+1 << ") " << tags[c].name << std::endl;
                     }
+                    //Prompts for exact actions after the tag has been selected.
                     while(!validTagNumber){
                         std::cin >> tagChoice;
                         char userCharChoice;
@@ -165,13 +168,16 @@ void sceneManager::sceneSelection(){
                                 }
                             }
                         }
+                        //Stops loop.
                         else if(tagChoice == -1){
                             doneMakingChoice = true;
                             validTagNumber = true;
                         }
+                        //Handles edge cases.
                         else{
                             tagChoice = 0;
                         }
+                        //Deletes irrelevant data once done.
                         std::cin.clear();
                         std::cin.ignore();
                     }
@@ -275,6 +281,7 @@ void sceneManager::sceneSelection(){
                 break;
             }
             case 3:{
+                //Handles choice changing.
                 bool userIsDone = false;
                 int userChoice = 0;
                 while(!userIsDone){
