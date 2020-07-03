@@ -38,6 +38,7 @@ int main(){
             std::cout << "Error! Invalid computation has happened. The coding gremlins are at it again!" << std::endl;
         }
     }
+    //Outtro message.
     std::cout << "Till next time!" << std::endl;
     return 0;
 }
