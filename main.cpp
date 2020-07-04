@@ -17,6 +17,9 @@ int main(){
     story->setQT(qT);
     play->setParent(title);
     title->setActive = true;
+    /*
+        Right here is where I would want to implement a transfer save data feature here.
+    */
     //direct scene selection.
     //scene * bip = new scene();
     //This generates a switch pattern between all the different menus, allowing them all to loop without every having to really share
@@ -38,6 +41,9 @@ int main(){
             std::cout << "Error! Invalid computation has happened. The coding gremlins are at it again!" << std::endl;
         }
     }
+    /*
+        All quit mechanics will reroute to here, need to put a quiting/saving data feature here.
+    */
     //Outtro message.
     std::cout << "Till next time!" << std::endl;
     return 0;
