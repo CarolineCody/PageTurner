@@ -1,0 +1,26 @@
+Story A
+ LineA
+ LineB
+ LineC
+    ChoiceA
+        Tags: 3
+    ChoiceB
+        Tags: 2
+    ChoiceC
+        Tags: 1
+Story B
+ LineA
+ LineB
+ LineC
+    ChoiceA
+        Tags: 3
+    ChoiceB
+        Tags: 2
+    ChoiceC
+        Tags: 1
+
+====================
+Player Save Scene
+    Tags: 1
+    Tags: 2
+    Tags: 3
