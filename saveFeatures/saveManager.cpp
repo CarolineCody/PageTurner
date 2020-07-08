@@ -139,6 +139,15 @@ std::vector<scene> saveManager::transferSaves(){
                     if(getline(reader,line) && line.length() > 7 && line[6] == ' ' && line[7] != ' '){
                         lineCount++;
                         //Need to impliment the scene content!
+                        /*
+                        
+                        
+                                      Maybe RetroActivley Add?
+                                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                        
+                        
+                        
+                        */
                     }
                     else{
                         lineCount++;
