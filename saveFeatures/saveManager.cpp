@@ -66,6 +66,10 @@ std::vector<scene> saveManager::transferSaves(){
     //Reads content.
     std::ifstream reader;
     std::string line;
+    //Stores the choices that need to have their linked scenes set at the end.
+    std::vector<choice*> incompleteChoices;
+    //Stores of the name of the scenes that each choice is linked to.
+    std::vector<std::string> sceneNames;
     int lineCount = 0;
     reader.open("saveFiles/text.txt");
     //Checks to see if file is open.
@@ -117,10 +121,10 @@ std::vector<scene> saveManager::transferSaves(){
                     if(getline(reader,line) && line.length() > 5 && line[4] == ' ' && line[5] != ' '){
                         lineCount++;
                         tag tempo;
-                        tempo.name = line.substr(3);
+                        tempo.name = line.substr(5);
                         if(getline(reader,line) && line.length() > 6 && line[5] == ' ' && line[6] != ' '){
                             lineCount++;
-                            tempo.amount = stoi(line.substr(4));
+                            tempo.amount = stoi(line.substr(6));
                         }
                         else{
                             lineCount++;
@@ -138,16 +142,7 @@ std::vector<scene> saveManager::transferSaves(){
                     }
                     if(getline(reader,line) && line.length() > 7 && line[6] == ' ' && line[7] != ' '){
                         lineCount++;
-                        //Need to impliment the scene content!
-                        /*
-                        
-                        
-                                      Maybe RetroActivley Add?
-                                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                        
-                        
-                        
-                        */
+                        sceneNames.push_back(line.substr(7));
                     }
                     else{
                         lineCount++;
@@ -155,6 +150,7 @@ std::vector<scene> saveManager::transferSaves(){
                         std::cout << "Error found on line " << lineCount << " of save file." << std::endl;
                         reader.close();
                     }
+                    incompleteChoices.push_back(tempi);
                     temp.choices.push_back(tempi);
                 }
                 //Finally adds the completed scene back into the library of scenes.
@@ -171,6 +167,24 @@ std::vector<scene> saveManager::transferSaves(){
     }
     reader.close();
     //Stores it under scenes.
+    
+    //Now assignment of scenes to choices.
+    for(int c = 0; c < incompleteChoices.size(); c++){
+        //Stores the choice that is having its scene assigned.
+        choice * temp = incompleteChoices[c];
+        //Stores the scene that is getting assigned to the current chioce.
+        scene * tempi;
+        //Checks to see if the objective was found or not.
+        bool found = false;
+        //Keeps track of indecies.
+        int huntress = 0;
+        while(huntress < scenes.size() && !found){
+            if(scenes[huntress].getTitle() == sceneNames[c]){
+                temp->linkScene = &scenes[huntress];
+                found = true;
+            }
+        }
+    }
     return scenes;
 }
 
