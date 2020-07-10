@@ -10,7 +10,7 @@ saveManager::saveManager(){
     //Does nothing for now.
 }
 
-void saveManager::setScenes(std::vector<scene> scene){
+void saveManager::setScenes(std::vector<scene*> scene){
     scenes = scene;
     return;
 }
@@ -32,26 +32,26 @@ void saveManager::save(){
     //Needs to recieve every scene!
     for(int c = 0; c < scenes.size(); c++){
         //Prints the scene title.
-        writer << scenes[c].getTitle();
+        writer << scenes[c]->getTitle();
         //Gets the text of the scene
-        for(int r = 0; r < scenes[c].text.size(); r++){
-            writer << " " << scenes[c].text[r] << std::endl;
+        for(int r = 0; r < scenes[c]->text.size(); r++){
+            writer << " " << scenes[c]->text[r] << std::endl;
         }
-        for(int r = 0; r < scenes[c].choices.size(); r++){
+        for(int r = 0; r < scenes[c]->choices.size(); r++){
             //Prints choice text.
-            writer << "  " << scenes[c].choices[r]->text << std::endl; //Two spaces.
+            writer << "  " << scenes[c]->choices[r]->text << std::endl; //Two spaces.
             //Prints required tags for choice.
-            for(int x = 0; x < scenes[c].choices[r]->required.size(); x++){
-                writer << "   " << scenes[c].choices[r]->required[x].name << std::endl; //Three spaces.
-                writer << "    " << scenes[c].choices[r]->required[x].amount << std::endl; //Four spaces.
+            for(int x = 0; x < scenes[c]->choices[r]->required.size(); x++){
+                writer << "   " << scenes[c]->choices[r]->required[x].name << std::endl; //Three spaces.
+                writer << "    " << scenes[c]->choices[r]->required[x].amount << std::endl; //Four spaces.
             }
             //Prints the give tags for the chioce.
-            for(int x = 0; x < scenes[c].choices[r]->gives.size(); x++){
-                writer << "     " << scenes[c].choices[r]->gives[x].name << std::endl; //Five spaces.
-                writer << "      " << scenes[c].choices[r]->gives[x].amount << std::endl; //Six spaces.
+            for(int x = 0; x < scenes[c]->choices[r]->gives.size(); x++){
+                writer << "     " << scenes[c]->choices[r]->gives[x].name << std::endl; //Five spaces.
+                writer << "      " << scenes[c]->choices[r]->gives[x].amount << std::endl; //Six spaces.
             }
             //Prints out the title of the scene that this choice is linked to.
-            writer << "       " << scenes[c].choices[r]->linkScene->getTitle() << std::endl; //Seven spaces;
+            writer << "       " << scenes[c]->choices[r]->linkScene->getTitle() << std::endl; //Seven spaces;
         }
     }
     //Always close your file once done writing to it!
@@ -61,7 +61,7 @@ void saveManager::save(){
     return;
 }
 
-std::vector<scene> saveManager::transferSaves(){
+std::vector<scene*> saveManager::transferSaves(){
     //Opens file.
     //Reads content.
     std::ifstream reader;
@@ -154,7 +154,7 @@ std::vector<scene> saveManager::transferSaves(){
                     temp.choices.push_back(tempi);
                 }
                 //Finally adds the completed scene back into the library of scenes.
-                scenes.push_back(temp);
+                scenes.push_back(&temp);
             }
             //Title not found, need to end the program and kill it with fire!
             else{
@@ -179,8 +179,8 @@ std::vector<scene> saveManager::transferSaves(){
         //Keeps track of indecies.
         int huntress = 0;
         while(huntress < scenes.size() && !found){
-            if(scenes[huntress].getTitle() == sceneNames[c]){
-                temp->linkScene = &scenes[huntress];
+            if(scenes[huntress]->getTitle() == sceneNames[c]){
+                temp->linkScene = scenes[huntress];
                 found = true;
             }
         }
