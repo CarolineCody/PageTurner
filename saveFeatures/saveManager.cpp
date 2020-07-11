@@ -18,7 +18,8 @@ void saveManager::setScenes(std::vector<scene*> scene){
 void saveManager::save(){
     //Deletes old content.
     std::ofstream ofs;
-    ofs.open("saveFiles/test.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.open("./saveFiles/test.txt", std::ofstream::out | std::ofstream::trunc);
+    //error in code here.
     if(!ofs.is_open()){
         std::cout << "Failed to open file." << std::endl;
     }
@@ -27,7 +28,7 @@ void saveManager::save(){
     //ends.
     std::ofstream writer;
     //Opens the provided file.
-    writer.open("saveFiles/test.txt");
+    writer.open("./saveFiles/test.txt");
     //Iterates through all provided scenes and prints their data into a file.
     //Needs to recieve every scene!
     for(int c = 0; c < scenes.size(); c++){
@@ -71,7 +72,7 @@ std::vector<scene*> saveManager::transferSaves(){
     //Stores of the name of the scenes that each choice is linked to.
     std::vector<std::string> sceneNames;
     int lineCount = 0;
-    reader.open("saveFiles/text.txt");
+    reader.open("./saveFiles/text.txt");
     //Checks to see if file is open.
     if(reader.is_open()){
         while(getline(reader,line)){
