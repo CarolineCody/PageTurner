@@ -72,7 +72,7 @@ std::vector<scene*> saveManager::transferSaves(){
     //Stores of the name of the scenes that each choice is linked to.
     std::vector<std::string> sceneNames;
     int lineCount = 0;
-    reader.open("./saveFiles/text.txt");
+    reader.open("./saveFeatures/saveFiles/text.txt");
     //Checks to see if file is open.
     if(reader.is_open()){
         while(getline(reader,line)){
@@ -165,6 +165,9 @@ std::vector<scene*> saveManager::transferSaves(){
                 reader.close();
             }
         }
+    }
+    else{
+        std::cout << "Failed to open file." << std::endl;
     }
     reader.close();
     //Stores it under scenes.
