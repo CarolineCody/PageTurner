@@ -109,6 +109,7 @@ std::vector<scene*> saveManager::transferSaves(){
                             std::cout << "Error found on line " << lineCount << " of save file." << std::endl;
                             reader.close();
                         }
+                        //Adds the tag to the choice.
                         tempi->required.push_back(tempo);
                     }
                     else{
@@ -133,24 +134,29 @@ std::vector<scene*> saveManager::transferSaves(){
                             std::cout << "Error found on line " << lineCount << " of save file." << std::endl;
                             reader.close();
                         }
+                        //Adds the tag to the choice.
                         tempi->gives.push_back(tempo);
                     }
                     else{
+                        //Handles error cases.
                         lineCount++;
                         std::cout << "Invalid require tag name found. Please fix file before continuing." << std::endl;
                         std::cout << "Error found on line " << lineCount << " of save file." << std::endl;
                         reader.close();
                     }
                     if(getline(reader,line) && line.length() > 7 && line[6] == ' ' && line[7] != ' '){
+                        //Preprs and stores a reference to the scene that this choice is linked to for later assignement.
                         lineCount++;
                         sceneNames.push_back(line.substr(7));
                     }
                     else{
+                        //Handles error case for an invalid linked scene name was found.
                         lineCount++;
                         std::cout << "Invalid require link scene found. Please fix file before continuing." << std::endl;
                         std::cout << "Error found on line " << lineCount << " of save file." << std::endl;
                         reader.close();
                     }
+                    //Finally, the choice is now stored where it is supposed to be.
                     incompleteChoices.push_back(tempi);
                     temp.choices.push_back(tempi);
                 }
