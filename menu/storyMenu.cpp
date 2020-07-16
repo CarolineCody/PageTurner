@@ -88,8 +88,13 @@ std::vector<scene *> storyMenu::printMenu(){
                     std::cout << "========================================================" << std::endl;
                     std::cout << "|               Please Select a Scene                  |" << std::endl;
                     std::cout << "========================================================" << std::endl;
-                    for(int c = 0; c < titleScenes.size(); c++){
-                        std::cout << c+1 << ") " << titleScenes[c]->getTitle() << "." << std::endl;
+                    if(titleScenes.size() > 0){
+                        for(int c = 0; c < titleScenes.size(); c++){
+                            std::cout << c+1 << ") " << titleScenes[c]->getTitle() << "." << std::endl;
+                        }
+                    }
+                    else{
+                        std::cout << "No scenes are available at this time." << std::endl;
                     }
                     //Gives user quiting options.
                     std::cout << titleScenes.size()+1 << ") Edit Selected Scene." << std::endl;
