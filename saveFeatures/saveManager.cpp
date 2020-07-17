@@ -31,30 +31,32 @@ void saveManager::save(){
     writer.open("./saveFeatures/saveFiles/test.txt");
     //Iterates through all provided scenes and prints their data into a file.
     //Needs to recieve every scene!
-    for(int c = 0; c < scenes.size(); c++){
-        //Prints the scene title.
-        writer << scenes[c]->getTitle() << std::endl;
-        //Gets the text of the scene
-        for(int r = 0; r < scenes[c]->text.size(); r++){
-            writer << " |" << scenes[c]->text[r] << "|" << std::endl;
-        }
-        for(int r = 0; r < scenes[c]->choices.size(); r++){
-            //Prints choice text.
-            writer << "  |" << scenes[c]->choices[r]->text << "|" << std::endl; //Two spaces.
-            //Prints required tags for choice.
-            for(int x = 0; x < scenes[c]->choices[r]->required.size(); x++){
-                writer << "   |" << scenes[c]->choices[r]->required[x].name << "|" << std::endl; //Three spaces.
-                writer << "    |" << scenes[c]->choices[r]->required[x].amount << "|" << std::endl; //Four spaces.
+    if(writer.is_open()){
+        for(int c = 0; c < scenes.size(); c++){
+            //Prints the scene title.
+            writer << scenes[c]->getTitle() << std::endl;
+            //Gets the text of the scene
+            for(int r = 0; r < scenes[c]->text.size(); r++){
+                writer << " |" << scenes[c]->text[r] << "|" << std::endl;
             }
-            //Prints the give tags for the chioce.
-            for(int x = 0; x < scenes[c]->choices[r]->gives.size(); x++){
-                writer << "     |" << scenes[c]->choices[r]->gives[x].name << "|" << std::endl; //Five spaces.
-                writer << "      |" << scenes[c]->choices[r]->gives[x].amount << "|" << std::endl; //Six spaces.
+            for(int r = 0; r < scenes[c]->choices.size(); r++){
+                //Prints choice text.
+                writer << "  |" << scenes[c]->choices[r]->text << "|" << std::endl; //Two spaces.
+                //Prints required tags for choice.
+                for(int x = 0; x < scenes[c]->choices[r]->required.size(); x++){
+                    writer << "   |" << scenes[c]->choices[r]->required[x].name << "|" << std::endl; //Three spaces.
+                    writer << "    |" << scenes[c]->choices[r]->required[x].amount << "|" << std::endl; //Four spaces.
+                }
+                //Prints the give tags for the chioce.
+                for(int x = 0; x < scenes[c]->choices[r]->gives.size(); x++){
+                    writer << "     |" << scenes[c]->choices[r]->gives[x].name << "|" << std::endl; //Five spaces.
+                    writer << "      |" << scenes[c]->choices[r]->gives[x].amount << "|" << std::endl; //Six spaces.
+                }
+                //Prints out the title of the scene that this choice is linked to.
+                writer << "       |" << scenes[c]->choices[r]->linkScene->getTitle() << "|" << std::endl; //Seven spaces;
             }
-            //Prints out the title of the scene that this choice is linked to.
-            writer << "       |" << scenes[c]->choices[r]->linkScene->getTitle() << "|" << std::endl; //Seven spaces;
         }
-    }
+    }   
     //Always close your file once done writing to it!
     writer.close();
 
