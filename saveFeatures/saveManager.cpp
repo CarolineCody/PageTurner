@@ -197,6 +197,9 @@ std::vector<scene*> saveManager::transferSaves(){
             }
         }
     }
+    if(scenes.size() == 0){
+        std::cout << "No content found!" << std::endl;
+    }
     return scenes;
 }
 
