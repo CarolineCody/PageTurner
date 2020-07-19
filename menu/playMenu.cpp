@@ -88,9 +88,11 @@ std::vector<scene *> playMenu::printMenu(){
                 }
             }
         }
+        std::cout << "========================================================" << std::endl;
         std::cout << "Type -1 to end this program." << std::endl;
         std::cout << "Type -2 to go back to the story selection menu." << std::endl;
         std::cout << "Type -3 to go back to the main menu." << std::endl;
+        std::cout << "========================================================" << std::endl;
         std::cin >> userAction;
         //Handles a line selection and tags/ choices.
         if(!std::cin.fail() && userAction > 0 && userAction <= activeScene->choices.size()){
