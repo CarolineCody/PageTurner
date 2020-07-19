@@ -83,12 +83,13 @@ std::vector<scene*> saveManager::transferSaves(){
             //Found title of scene.
             if(line.length() > 0 && line[0] != ' '){
                 //Makes a new scene;
-                scene temp;
-                temp.setTitle(line);
+                scene * temp = new scene();
+                temp->setTitle(line);
                 //Gets scene title.
                 while(getline(reader,line) && line.length() > 1 && line[0] == ' ' && line[1] != ' '){
                     lineCount++;
-                    temp.text.push_back(line.substr(2,line.length()-3));
+                    std::cout << line.substr(2,line.length()-3)  << std::endl;
+                    temp->text.push_back(line.substr(2,line.length()-3));
                 }
                 //Creates a choice for the scene (both gives and requires) and then adds them to the scene.
                 while(getline(reader,line) && line.length() > 2 && line[1] == ' ' && line[2] != ' '){
@@ -160,10 +161,10 @@ std::vector<scene*> saveManager::transferSaves(){
                     }
                     //Finally, the choice is now stored where it is supposed to be.
                     incompleteChoices.push_back(tempi);
-                    temp.choices.push_back(tempi);
+                    temp->choices.push_back(tempi);
                 }
                 //Finally adds the completed scene back into the library of scenes.
-                scenes.push_back(&temp);
+                scenes.push_back(temp);
             }
             //Title not found, need to end the program and kill it with fire!
             else{

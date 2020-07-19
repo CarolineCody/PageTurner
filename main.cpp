@@ -23,9 +23,6 @@ int main(){
     */
     saveManager saveState;
     scenes = saveState.transferSaves();
-    if(scenes.size() == 0){
-        std::cout << "RUN FOR THE HILLS WE GOT A SEG FAULT INCOMING DUE TO BAD DATA ALLOCATION!" << std::endl;
-    }
     //direct scene selection.
     //scene * bip = new scene();
     //This generates a switch pattern between all the different menus, allowing them all to loop without every having to really share
