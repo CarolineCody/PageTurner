@@ -84,11 +84,10 @@ std::vector<scene*> saveManager::transferSaves(){
             if(line.length() > 0 && line[0] != ' '){
                 //Makes a new scene;
                 scene * temp = new scene();
-                temp->setTitle(line);
+                temp->setTitle(line,true);
                 //Gets scene title.
                 while(getline(reader,line) && line.length() > 1 && line[0] == ' ' && line[1] != ' '){
                     lineCount++;
-                    std::cout << line.substr(2,line.length()-3)  << std::endl;
                     temp->text.push_back(line.substr(2,line.length()-3));
                 }
                 //Creates a choice for the scene (both gives and requires) and then adds them to the scene.

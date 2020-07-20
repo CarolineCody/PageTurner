@@ -340,7 +340,7 @@ void sceneManager::sceneSelection(){
                 std::string newTitle;
                 std::cout << "What would you like to change the scene title to?" << std::endl;
                 std::getline(std::cin,newTitle);
-                activeScene->setTitle(newTitle);
+                activeScene->setTitle(newTitle,false);
                 std::cout << "Title is now set to \"" << newTitle << "\"." << std::endl;
                 break;
             }

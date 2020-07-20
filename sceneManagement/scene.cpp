@@ -16,7 +16,7 @@ void scene::editScene(){
     std::cin.ignore();
     std::cout << "New scene created. What would you like to call this scene?" << std::endl;
     std::getline(std::cin, userInput);
-    setTitle(userInput);
+    setTitle(userInput,false);
     editText();
     return;
 }
@@ -119,10 +119,12 @@ std::string scene::getTitle(){
     return title;
 }
 
-void scene::setTitle(std::string newTitle){
+void scene::setTitle(std::string newTitle, bool quiet){
     //Assigns and notifies the user what the new title is.
     title = newTitle;
-    std::cout << "Title has been set to \"" << newTitle << "\"." << std::endl;
+    if(!quiet){
+        std::cout << "Title has been set to \"" << newTitle << "\"." << std::endl;
+    }
     return;
 }
 
