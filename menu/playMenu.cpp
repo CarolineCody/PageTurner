@@ -49,6 +49,7 @@ std::vector<scene *> playMenu::printMenu(){
         //Handles leaving the play menu.
         else if(userInput == stories.size()+1){
             backPedal();
+            return stories;
         }
         //Handles quiting procedures.
         else if(userInput == stories.size()+2){
