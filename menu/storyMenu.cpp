@@ -71,7 +71,7 @@ std::vector<scene *> storyMenu::printMenu(){
         switch(userInput){
         case 1:{
             if(!activeScene){
-                std::cout << "No Story Selected. Please select a story first." << std::endl;
+                std::cout << "No Story Selected. Please select a story first using \"2) Select Story\" first." << std::endl;
             }
             else{
                 qT->run(activeScene);
