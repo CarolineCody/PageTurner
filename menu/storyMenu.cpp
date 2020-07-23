@@ -98,7 +98,8 @@ std::vector<scene *> storyMenu::printMenu(){
                     }
                     //Gives user quiting options.
                     std::cout << titleScenes.size()+1 << ") Edit Selected Scene." << std::endl;
-                    std::cout << titleScenes.size()+2 << ") Quit." << std::endl;
+                    std::cout << titleScenes.size()+2 << ") Return to Main Menu." << std::endl;
+                    std::cout << "========================================================" << std::endl;
                     std::cin >> input;
                     std::cin.clear();
                     std::cin.ignore();
