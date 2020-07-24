@@ -50,6 +50,7 @@ void sceneManager::sceneSelection(){
         std::cout << "| 8) Quit.                                             |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cin >> userActionChoice;
+        //No prper management from here on in.
         switch(userActionChoice){
             case 1:{
                 //Handles case where the file has nothing to show.
