@@ -50,6 +50,8 @@ void sceneManager::sceneSelection(){
         std::cout << "| 8) Quit.                                             |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cin >> userActionChoice;
+        std::cin.clear();
+        std::cin.ignore();
         //No prper management from here on in.
         switch(userActionChoice){
             case 1:{
@@ -76,61 +78,67 @@ void sceneManager::sceneSelection(){
                     bool validTagNumber = false;
                     std::cout << "Select the number of the tag you would like to add/remove to/from this choice." << std::endl;
                     std::cout << "Enter -1 to quit." << std::endl;
-                    for(int c = 0; c< tags.size(); c++){
-                        std::cout << c+1 << ") " << tags[c].name << std::endl;
+                    if(tags.size() == 0){
+                        std::cout << "No choices available at this time." << std::endl;
+                        doneMakingChoice = true;
                     }
-                    //Prompts for exact actions after the tag has been selected.
-                    while(!validTagNumber){
-                        std::cin >> tagChoice;
-                        char userCharChoice;
-                        if(tagChoice > 0 && tagChoice <= tags.size()){
-                            validTagNumber = true;
-                            std::cout << "Would you like to add this tag or remove this tag (+/-)?" << std::endl;
-                            std::cout << "Enter anything else to quit."                             << std::endl;
-                            std::cin >> userCharChoice;
-                            switch(userCharChoice){
-                                case '+':{
-                                    //Handles add.
-                                    int giveOrRequire = 0;
-                                    std::cout << "Would you like it to be given upon selecting this choice? Or Required to select this choice?" << std::endl;
-                                    std::cout << "1) Give." << std::endl;
-                                    std::cout << "2) Take." << std::endl;
-                                    std::cout << "Enter anything else to quit." << std::endl;
-                                    std::cin >> giveOrRequire;
-                                    //For Give.
-                                    if(giveOrRequire == 1){
-                                        activeChoice->gives.push_back(tags[tagChoice-1]);
-                                        bool quantityFound = false;
-                                        int quantity;
-                                        while(!quantityFound){
-                                            std::cout << "How many of these tags would you like to give?" << std::endl;
-                                            std::cin >> quantity;
-                                            if(!std::cin.fail()){
-                                                quantityFound = true;
-                                                activeChoice->gives[activeChoice->gives.size()-1].amount = quantity;
+                    else
+                    {
+                        for(int c = 0; c< tags.size(); c++){
+                            std::cout << c+1 << ") " << tags[c].name << std::endl;
+                        }
+                        //Prompts for exact actions after the tag has been selected.
+                        while(!validTagNumber){
+                            std::cin >> tagChoice;
+                            char userCharChoice;
+                            if(tagChoice > 0 && tagChoice <= tags.size()){
+                                validTagNumber = true;
+                                std::cout << "Would you like to add this tag or remove this tag (+/-)?" << std::endl;
+                                std::cout << "Enter anything else to quit."                             << std::endl;
+                                std::cin >> userCharChoice;
+                                switch(userCharChoice){
+                                    case '+':{
+                                        //Handles add.
+                                        int giveOrRequire = 0;
+                                        std::cout << "Would you like it to be given upon selecting this choice? Or Required to select this choice?" << std::endl;
+                                        std::cout << "1) Give." << std::endl;
+                                        std::cout << "2) Take." << std::endl;
+                                        std::cout << "Enter anything else to quit." << std::endl;
+                                        std::cin >> giveOrRequire;
+                                        //For Give.
+                                        if(giveOrRequire == 1){
+                                            activeChoice->gives.push_back(tags[tagChoice-1]);
+                                            bool quantityFound = false;
+                                            int quantity;
+                                            while(!quantityFound){
+                                                std::cout << "How many of these tags would you like to give?" << std::endl;
+                                                std::cin >> quantity;
+                                                if(!std::cin.fail()){
+                                                    quantityFound = true;
+                                                    activeChoice->gives[activeChoice->gives.size()-1].amount = quantity;
+                                                }
+                                                std::cin.clear();
+                                                std::cin.ignore();
                                             }
-                                            std::cin.clear();
-                                            std::cin.ignore();
                                         }
-                                    }
-                                    //For Require.
-                                    else if(giveOrRequire == 2){
-                                        activeChoice->gives.push_back(tags[tagChoice-1]);
-                                        bool quantityFound = false;
-                                        int quantity;
-                                        while(!quantityFound){
-                                            std::cout << "How many of these tags would you like to require?" << std::endl;
-                                            std::cin >> quantity;
-                                            if(!std::cin.fail()){
-                                                quantityFound = true;
-                                                activeChoice->gives[activeChoice->gives.size()-1].amount = quantity;
+                                        //For Require.
+                                        else if(giveOrRequire == 2){
+                                            activeChoice->gives.push_back(tags[tagChoice-1]);
+                                            bool quantityFound = false;
+                                            int quantity;
+                                            while(!quantityFound){
+                                                std::cout << "How many of these tags would you like to require?" << std::endl;
+                                                std::cin >> quantity;
+                                                if(!std::cin.fail()){
+                                                    quantityFound = true;
+                                                    activeChoice->gives[activeChoice->gives.size()-1].amount = quantity;
+                                                }
+                                                std::cin.clear();
+                                                std::cin.ignore();
                                             }
-                                            std::cin.clear();
-                                            std::cin.ignore();
                                         }
+                                        break;
                                     }
-                                    break;
-                                }
                                 case '-':{
                                     //Handles remove.
                                     int giveOrRequire = 0;
@@ -178,6 +186,7 @@ void sceneManager::sceneSelection(){
                         else{
                             tagChoice = 0;
                         }
+                    }
                         //Deletes irrelevant data once done.
                         std::cin.clear();
                         std::cin.ignore();
