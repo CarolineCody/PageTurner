@@ -76,7 +76,7 @@ void sceneManager::sceneSelection(){
                 while(!doneMakingChoice){
                     int tagChoice = 0;
                     bool validTagNumber = false;
-                    std::cout << "Select the number of the tag you would like to add/remove to/from this choice." << std::endl;
+                    std::cout << "Select the number representing the tag you would like to add/remove to/from this choice." << std::endl;
                     std::cout << "Enter -1 to quit." << std::endl;
                     if(tags.size() == 0){
                         std::cout << "No choices available at this time." << std::endl;
