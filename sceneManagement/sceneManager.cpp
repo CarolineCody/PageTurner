@@ -168,25 +168,25 @@ void sceneManager::sceneSelection(){
                                                     activeChoice->gives.erase(activeChoice->gives.begin()+c);
                                                 }
                                                 else{
-                                                    activeChoice->gives.pop_back();
+                                                        activeChoice->gives.pop_back();
+                                                    }
                                                 }
                                             }
                                         }
+                                        break;
                                     }
-                                    break;
                                 }
                             }
+                            //Stops loop.
+                            else if(tagChoice == -1){
+                                doneMakingChoice = true;
+                                validTagNumber = true;
+                            }
+                            //Handles edge cases.
+                            else{
+                                tagChoice = 0;
+                            }
                         }
-                        //Stops loop.
-                        else if(tagChoice == -1){
-                            doneMakingChoice = true;
-                            validTagNumber = true;
-                        }
-                        //Handles edge cases.
-                        else{
-                            tagChoice = 0;
-                        }
-                    }
                         //Deletes irrelevant data once done.
                         std::cin.clear();
                         std::cin.ignore();
