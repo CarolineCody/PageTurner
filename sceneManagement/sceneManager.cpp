@@ -209,8 +209,12 @@ void sceneManager::sceneSelection(){
                     int tagChoice = 0;
                     bool validTagNumber = false;
                     std::cout << "Select the number of the tag you would like to add/remove to/from this choice." << std::endl;
+                    std::cout << "Press -1 to quit." << std::endl;
                     for(int c = 0; c< tags.size(); c++){
                         std::cout << c+1 << ") " << tags[c].name << std::endl;
+                    }
+                    if(tags.size() == 0){
+                        std::cout << "No tags available at this time." << std::endl;
                     }
                     while(!validTagNumber){
                         std::cin >> tagChoice;
@@ -279,9 +283,15 @@ void sceneManager::sceneSelection(){
                                 }
                             }
                         }
-                        else{
+                        else if(tagChoice == -1){
+                            std::cout << "Quiting tag adding." << std::endl;
                             tagChoice = 0;
+                            return;
                         }
+                        else{
+                            std::cout << "Invalid input." << std::endl;
+                        }
+                        //maybe create a new function that allows the user to make a new tag on the spot or at leat a quit feature.
                         std::cin.clear();
                         std::cin.ignore();
                     }
