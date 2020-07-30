@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include "scene.hpp"
 #include "sceneManager.hpp"
 #include "../dataStructs/choice.hpp"
