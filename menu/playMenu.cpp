@@ -127,6 +127,7 @@ std::vector<scene *> playMenu::printMenu(){
             }
             case -1:{
                 quit();
+                setActiveStory = false;
                 break;
             }
         };
