@@ -10,7 +10,7 @@ sceneManager::sceneManager(){
     return;
 }
 
-void sceneManager::sceneSelection(){
+std::vector<scene *> sceneManager::sceneSelection(){
     scene * activeScene;
     int sceneSelectionNumber;
     int userActionChoice;
@@ -20,14 +20,14 @@ void sceneManager::sceneSelection(){
     std::cout << "|                   Select a Scene                     |" << std::endl;
     std::cout << "========================================================" << std::endl;
     for(int c = 0; c < scenes.size(); c++){
-        std::cout << "|" << c+1 << ") " << scenes[c].getTitle() << std::endl;
+        std::cout << "|" << c+1 << ") " << scenes[c]->getTitle() << std::endl;
     }
     while(!validActionTaken){
         //Loops until the user makes a valid selection.
         std::cout << "Enter in the number of the scene you would like to activly edit." << std::endl;
         std::cin >> sceneSelectionNumber;
         if(sceneSelectionNumber > 0 && sceneSelectionNumber <= scenes.size()){
-            activeScene = &scenes[sceneSelectionNumber-1];
+            activeScene = scenes[sceneSelectionNumber-1];
             validActionTaken = true;
         }
         else{
@@ -287,7 +287,7 @@ void sceneManager::sceneSelection(){
                         else if(tagChoice == -1){
                             std::cout << "Quiting tag adding." << std::endl;
                             tagChoice = 0;
-                            return;
+                            return scenes;
                         }
                         else{
                             std::cout << "Invalid input." << std::endl;
@@ -386,11 +386,11 @@ void sceneManager::sceneSelection(){
                 }
                 std::cout << "Select a scene you would like to connect to this choice." << std::endl;
                 for(int c = 0; c < scenes.size(); c++){
-                    std::cout << c+1 << ") " << scenes[c].getTitle() << std::endl;
+                    std::cout << c+1 << ") " << scenes[c]->getTitle() << std::endl;
                 }
                 std::cin >> sceneSelection;
                 if(sceneSelection > 0 && sceneSelection <= scenes.size()){
-                    activeChoice->linkScene = &scenes[sceneSelection-1];
+                    activeChoice->linkScene = scenes[sceneSelection-1];
                 }
                 else{
                     std::cout << "Invalid scene selected." << std::endl;
@@ -406,6 +406,7 @@ void sceneManager::sceneSelection(){
             std::cin.ignore();
         };
     }
+    return scenes;
 }
 
 void sceneManager::tagsManager(){
@@ -476,5 +477,9 @@ void sceneManager::tagsManager(){
 }
 
 void sceneManager::setScenes(std::vector<scene> scns){
-    scenes = scns;
+    scenes.clear();
+    for(int c = 0; c < scns.size(); c++){
+        scenes.push_back(&scns[c]);
+    }
+    return;
 }

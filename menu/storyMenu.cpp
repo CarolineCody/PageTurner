@@ -118,7 +118,8 @@ std::vector<scene *> storyMenu::printMenu(){
                             sceneManager * sceneController = new sceneManager();
                             appendScenes(sceneForBook,activeScene);
                             sceneController->setScenes(sceneForBook);
-                            sceneController->sceneSelection();
+                            //potential future bug, to be considered later.
+                            titleScenes = sceneController->sceneSelection();
                             quit =  true;
                         }
                     }
