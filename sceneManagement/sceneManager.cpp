@@ -216,6 +216,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                     }
                     if(tags.size() == 0){
                         std::cout << "No tags available at this time." << std::endl;
+                        //Create a create tag option here.
                     }
                     while(!validTagNumber){
                         std::cin >> tagChoice;
