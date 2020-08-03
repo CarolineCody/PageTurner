@@ -42,13 +42,14 @@ std::vector<scene *> sceneManager::sceneSelection(){
         std::cout << "|                    Scene Manager                     |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cout << "| 1) Edit tags of choices.                             |" << std::endl;
-        std::cout << "| 2) Add choice to Scene.                              |" << std::endl;
-        std::cout << "| 3) Edit choice title.                                |" << std::endl;
-        std::cout << "| 4) Remove choice from Scene.                         |" << std::endl;
-        std::cout << "| 5) Set Scene title.                                  |" << std::endl;
-        std::cout << "| 6) Edit Scene text.                                  |" << std::endl;
-        std::cout << "| 7) Set the scene that a choice connects to.          |" << std::endl;
-        std::cout << "| 8) Return to Edit menu.                              |" << std::endl;
+        std::cout << "| 2) Add or Remove a tag.                              |" << std::endl;
+        std::cout << "| 3) Add choice to Scene.                              |" << std::endl;
+        std::cout << "| 4) Edit choice title.                                |" << std::endl;
+        std::cout << "| 5) Remove choice from Scene.                         |" << std::endl;
+        std::cout << "| 6) Set Scene title.                                  |" << std::endl;
+        std::cout << "| 7) Edit Scene text.                                  |" << std::endl;
+        std::cout << "| 8) Set the scene that a choice connects to.          |" << std::endl;
+        std::cout << "| 9) Return to Edit menu.                              |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cin >> userActionChoice;
         std::cin.clear();
@@ -197,6 +198,10 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 break;
             }
             case 2:{
+                tagsManager();
+                break;
+            }
+            case 3:{
                 choice * newChoice = new choice();
                 std::string newChoiceText;
                 bool doneMakingChoice = false;
@@ -216,6 +221,8 @@ std::vector<scene *> sceneManager::sceneSelection(){
                     }
                     if(tags.size() == 0){
                         std::cout << "No tags available at this time." << std::endl;
+                        activeScene->choices.push_back(newChoice);
+                        break;
                         //Create a create tag option here.
                     }
                     while(!validTagNumber){
@@ -302,7 +309,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 activeScene->choices.push_back(newChoice);
                 break;
             }
-            case 3:{
+            case 4:{
                 //Handles choice changing.
                 bool userIsDone = false;
                 int userChoice = 0;
@@ -333,7 +340,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 }
                 break;
             }
-            case 4:{
+            case 5:{
                 std::string choiceName;
                 int choice;
                 bool validChoice = false;
@@ -357,7 +364,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 activeScene->removeChoice(choiceName);
                 break;
             }
-            case 5:{
+            case 6:{
                 //Reassigns title.
                 std::string newTitle;
                 std::cout << "What would you like to change the scene title to?" << std::endl;
@@ -366,12 +373,12 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 std::cout << "Title is now set to \"" << newTitle << "\"." << std::endl;
                 break;
             }
-            case 6:{
+            case 7:{
                 //Handles text management.
                 activeScene->editText();
                 break;
             }
-            case 7:{
+            case 8:{
                 //Handles text management.
                 int choiceSelection = 0;
                 int sceneSelection = 0;
@@ -398,10 +405,13 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 }
                 break;
             }
-            case 8:{
+            case 9:{
                 //Stops the scene.
                 validActionTaken = true;
                 break;
+            }
+            default:{
+                std::cout << "Invalid Input." << std::endl;
             }
             std::cin.clear();
             std::cin.ignore();
@@ -477,10 +487,7 @@ void sceneManager::tagsManager(){
     }
 }
 
-void sceneManager::setScenes(std::vector<scene> scns){
-    scenes.clear();
-    for(int c = 0; c < scns.size(); c++){
-        scenes.push_back(&scns[c]);
-    }
+void sceneManager::setScenes(std::vector<scene*> scns){
+    scenes = scns;
     return;
 }

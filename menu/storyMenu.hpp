@@ -22,6 +22,7 @@ class storyMenu{
         std::vector<scene *> printMenu();             //Prints out the menu and its prompts for this menu.
         void setScenes(std::vector<scene *> scenes);  //Changes the scenes within the program declaration and call.
         void quit();                                  //Just quits the program AFTER SAVIING ALL THE WORK AS A OLDSTORY MENU.
+        void appendScenes(std::vector<scene*> listOfScenes, scene* entry);// gets relevant scene info
         bool setActive;                               //Declares this menu as the active area that the user is interacting with.
 };
 #endif

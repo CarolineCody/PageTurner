@@ -35,17 +35,17 @@ void storyMenu::backPedal(){
     return;
 }
 
-void appendScenes(std::vector<scene>& listOfScenes, scene* entry){
+void storyMenu::appendScenes(std::vector<scene*> listOfScenes, scene* entry){
     //Searches for and attache a scene to a list of give scenes.
     bool found = false;
     for(int c = 0; c < listOfScenes.size(); c++){
-        if(entry->getTitle() == listOfScenes[c].getTitle()){
+        if(entry->getTitle() == listOfScenes[c]->getTitle()){
             found = true;
         }
     }
     //Checks to see if the scene was found, it it is not, it is just added to the listOfScenes.
     if(!found){
-        listOfScenes.push_back(*entry);
+        listOfScenes.push_back(entry);
     }
     //Then the system loops for each of the other linked scenes.
     for(int c = 0; c < entry->choices.size(); c++){
@@ -114,7 +114,7 @@ std::vector<scene *> storyMenu::printMenu(){
                             std::cout << "No scene selected, please choose a scene before editing." << std::endl;
                         }
                         else{
-                            std::vector<scene> sceneForBook;
+                            std::vector<scene * > sceneForBook;
                             sceneManager * sceneController = new sceneManager();
                             appendScenes(sceneForBook,activeScene);
                             sceneController->setScenes(sceneForBook);

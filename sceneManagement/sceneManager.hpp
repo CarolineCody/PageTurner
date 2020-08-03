@@ -8,7 +8,7 @@ class sceneManager{
         sceneManager();                    //Default constructor for the scene.
         std::vector<scene *> sceneSelection();             //Sets the active scene to be manipualted by the user and then allows user to manage that scene and its tags.
         void tagsManager();                //Manages and handles the creation and removal of tags within this story.
-        void setScenes(std::vector<scene> scns);//Sets scenes;
+        void setScenes(std::vector<scene*> scns);//Sets scenes;
     private:
         std::vector<scene*> scenes;         //Manages all the scenes owned by this story.
         std::vector<tag> tags;             //Stores a reference to all tags within the scene for reference.
