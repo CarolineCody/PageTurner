@@ -430,7 +430,7 @@ void sceneManager::tagsManager(){
         std::cout << "========================================================" << std::endl;
         std::cout << "| 1) Add a Tag.                                        |" << std::endl;
         std::cout << "| 2) Remove a Tag.                                     |" << std::endl;
-        std::cout << "| 3) Quit.                                             |" << std::endl;
+        std::cout << "| 3) Return to edit menu.                              |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cin >> userAction;
         switch(userAction){
