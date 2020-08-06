@@ -150,7 +150,7 @@ void scene::editText(){
             std::cout << "| If there are no lines as of present, please enter    |" << std::endl;
             std::cout << "| any number other than -1 to start editing.           |" << std::endl;
         }
-        std::cout << "| Or enter -1 to quit.                                 |" << std::endl;
+        std::cout << "| Or enter -1 to return to scene selection.                |" << std::endl;
         std::cout << "| Line #: ";
         std::cin >> userLineSelection;
         std::cin.clear();
