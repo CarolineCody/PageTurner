@@ -91,8 +91,8 @@ void quickTest::run(scene * activeScene){
                 break;
             }
             case -1:{
-                userWantsToQuit = true;
                 quit();
+                userWantsToQuit = !story->setActive;
                 break;
             }
         };

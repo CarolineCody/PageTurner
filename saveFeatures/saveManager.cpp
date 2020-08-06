@@ -147,7 +147,7 @@ std::vector<scene*> saveManager::transferSaves(){
                         reader.close();
                     }
                     if(getline(reader,line) && line.length() > 7 && line[6] == ' ' && line[7] != ' '){
-                        //Preprs and stores a reference to the scene that this choice is linked to for later assignement.
+                        //Preps and stores a reference to the scene that this choice is linked to for later assignement.
                         lineCount++;
                         sceneNames.push_back(line.substr(8,line.length()-9));
                     }

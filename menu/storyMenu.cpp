@@ -35,7 +35,7 @@ void storyMenu::backPedal(){
     return;
 }
 
-void storyMenu::appendScenes(std::vector<scene*> listOfScenes, scene* entry){
+std::vector<scene*> storyMenu::appendScenes(std::vector<scene*> listOfScenes, scene* entry){
     //Searches for and attache a scene to a list of give scenes.
     bool found = false;
     for(int c = 0; c < listOfScenes.size(); c++){
@@ -49,9 +49,9 @@ void storyMenu::appendScenes(std::vector<scene*> listOfScenes, scene* entry){
     }
     //Then the system loops for each of the other linked scenes.
     for(int c = 0; c < entry->choices.size(); c++){
-        appendScenes(listOfScenes,entry->choices[c]->linkScene);
+        listOfScenes = appendScenes(listOfScenes,entry->choices[c]->linkScene);
     }
-    return;
+    return listOfScenes;
 }
 
 std::vector<scene *> storyMenu::printMenu(){
@@ -116,7 +116,10 @@ std::vector<scene *> storyMenu::printMenu(){
                         else{
                             std::vector<scene * > sceneForBook;
                             sceneManager * sceneController = new sceneManager();
-                            appendScenes(sceneForBook,activeScene);
+                            sceneForBook = appendScenes(sceneForBook,activeScene);
+                            for(int c = 0; c < sceneForBook.size(); c++){
+                                std::cout << sceneForBook[c]->getTitle() << std::endl;
+                            }
                             sceneController->setScenes(sceneForBook);
                             //potential future bug, to be considered later.
                             sceneForBook = sceneController->sceneSelection();

@@ -19,8 +19,13 @@ std::vector<scene *> sceneManager::sceneSelection(){
     std::cout << "========================================================" << std::endl;
     std::cout << "|                   Select a Scene                     |" << std::endl;
     std::cout << "========================================================" << std::endl;
-    for(int c = 0; c < scenes.size(); c++){
-        std::cout << "|" << c+1 << ") " << scenes[c]->getTitle() << std::endl;
+    if(scenes.size() == 0){
+        std::cout << "Unable to find lines." << std::endl;
+    }
+    else{
+        for(int c = 0; c < scenes.size(); c++){
+            std::cout << "|" << c+1 << ") " << scenes[c]->getTitle() << std::endl;
+        }
     }
     while(!validActionTaken){
         //Loops until the user makes a valid selection.
@@ -316,7 +321,11 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 while(!userIsDone){
                     std::cout << "Which choice would you like to change?" << std::endl;
                     for(int c = 0; c < activeScene->choices.size(); c++){
-                        std::cout << c+1 << ") " << activeScene->choices[c] << std::endl;
+                        std::cout << c+1 << ") " << activeScene->choices[c]->text << std::endl;
+                    }
+                    if(activeScene->choices.size() == 0){
+                        std::cout << "No scenes available at this time." << std::endl;
+                        userIsDone = true;
                     }
                     //Handles choice check.
                     std::cin >> userChoice;
@@ -332,6 +341,8 @@ std::vector<scene *> sceneManager::sceneSelection(){
                             std::getline(std::cin,newText);
                             if(newText.length() > 0){
                                 activeScene->choices[userChoice-1]->text = newText;
+                                nameChoosen = true;
+                                std::cout << "Names Changed." << std::endl;
                             }
                             std::cin.clear();
                             std::cin.ignore();
