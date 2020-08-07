@@ -163,13 +163,13 @@ void scene::editText(){
         else if((userLineSelection >= 0 && userLineSelection < text.size()) || (text.size() == 0)){
             //Keeps track of if the user is done editing lines or not.
             bool userDoneEditing = false;
-            while(!userDoneEditing){
+            while(!userDoneEditing && userLineSelection > 0){
                 userAction = 0;
                 for(int c = 0; c < text.size(); c++){
                     std::cout << c << ") " << text[c] << std::endl;
                 }
                 std::cout << "========================================================" << std::endl;
-                std::cout << "| What would you like to do with this line?            |" << std::endl;
+                std::cout << "| What would you like to do with line" << userLineSelection << "? |" << std::endl;
                 std::cout << "| 1) Add a new line.                                   |" << std::endl;
                 std::cout << "| 2) Delete this line.                                 |" << std::endl;
                 std::cout << "| 3) Change this line.                                 |" << std::endl;
@@ -188,6 +188,7 @@ void scene::editText(){
                             text.push_back(newLine);
                         }
                         else{
+                            userLineSelection++;
                             text.insert(text.begin()+userLineSelection,newLine);
                         }
                         break;
@@ -196,6 +197,7 @@ void scene::editText(){
                         //Remove this line.
                         if(text.size() > 0){
                             text.erase(text.begin()+userLineSelection);
+                            userLineSelection--;
                         }
                         else{
                             std::cout << "Unable to delete from text with length of zero." << std::endl;

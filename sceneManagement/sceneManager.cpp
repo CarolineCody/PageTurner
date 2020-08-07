@@ -47,9 +47,9 @@ std::vector<scene *> sceneManager::sceneSelection(){
         std::cout << "|                    Scene Manager                     |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cout << "| 1) Edit tags of choices.                             |" << std::endl;
-        std::cout << "| 2) Add or Remove a tag.                              |" << std::endl;
+        std::cout << "| 2) Manage or create tags.                            |" << std::endl;
         std::cout << "| 3) Add choice to Scene.                              |" << std::endl;
-        std::cout << "| 4) Edit choice title.                                |" << std::endl;
+        std::cout << "| 4) Edit choice text.                                 |" << std::endl;
         std::cout << "| 5) Remove choice from Scene.                         |" << std::endl;
         std::cout << "| 6) Set Scene title.                                  |" << std::endl;
         std::cout << "| 7) Edit Scene text.                                  |" << std::endl;
@@ -219,9 +219,9 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 while(!doneMakingChoice){
                     int tagChoice = 0;
                     bool validTagNumber = false;
-                    std::cout << "Select the number of the tag you would like to add/remove to/from this choice." << std::endl;
-                    std::cout << "Press -1 to quit." << std::endl;
                     for(int c = 0; c< tags.size(); c++){
+                        std::cout << "Select the number of the tag you would like to add/remove to/from this choice." << std::endl;
+                        std::cout << "Press -1 to quit." << std::endl;
                         std::cout << c+1 << ") " << tags[c].name << std::endl;
                     }
                     if(tags.size() == 0){
@@ -309,8 +309,8 @@ std::vector<scene *> sceneManager::sceneSelection(){
                         std::cin.clear();
                         std::cin.ignore();
                     }
-
                 }
+                std::cout << newChoice->text << std::endl;
                 activeScene->choices.push_back(newChoice);
                 break;
             }
@@ -324,7 +324,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                         std::cout << c+1 << ") " << activeScene->choices[c]->text << std::endl;
                     }
                     if(activeScene->choices.size() == 0){
-                        std::cout << "No scenes available at this time." << std::endl;
+                        std::cout << "No scenes available at this time. Press any key to quit." << std::endl;
                         userIsDone = true;
                     }
                     //Handles choice check.
@@ -444,6 +444,8 @@ void sceneManager::tagsManager(){
         std::cout << "| 3) Return to edit menu.                              |" << std::endl;
         std::cout << "========================================================" << std::endl;
         std::cin >> userAction;
+        // std::cin.clear();
+        std::cin.ignore();
         switch(userAction){
             case 1:{
                 tag newTag;
@@ -455,14 +457,23 @@ void sceneManager::tagsManager(){
                 std::cin.clear();
                 std::cin.ignore();
                 //Enter the tag value.
-                std::cout << "Enter the amount of the tag." << std::endl;
-                std::cin >> tagAmount;
-                std::cin.clear();
-                std::cin.ignore();
-                newTag.name = tagName;
-                newTag.amount = tagAmount;
-                tags.push_back(newTag);
-                std::cout << "New tag added." << std::endl;
+                bool foundAmount = false;
+                while(!foundAmount){
+                    std::cout << "Enter the amount of the tag." << std::endl;
+                    std::cin >> tagAmount;
+                    if(std::cin.fail()){
+                        std::cout << "Failed to enter a valid amount." << std::endl;
+                    }
+                    else{
+                        newTag.name = tagName;
+                        newTag.amount = tagAmount;
+                        tags.push_back(newTag);
+                        std::cout << "New tag added." << std::endl;
+                        foundAmount = true;
+                    }
+                    std::cin.clear();
+                    std::cin.ignore();
+                }
                 break;
             }
             case 2:{
@@ -492,8 +503,6 @@ void sceneManager::tagsManager(){
                 userIsDone = true;
                 break;
             }
-            std::cin.clear();
-            std::cin.ignore();
         };
     }
 }
