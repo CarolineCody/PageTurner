@@ -478,24 +478,29 @@ void sceneManager::tagsManager(){
             }
             case 2:{
                 int indexToRemove;
-                std::cout << "Select a tag to remove." << std::endl;
-                for(int c = 0; c < tags.size(); c++){
-                    std::cout << c+1 << ") " << tags[c].name << std::endl;
-                }
-                std::cin >> indexToRemove;
-                //Handles removal of tags.
-                if(indexToRemove > 0 && indexToRemove <= tags.size()){
-                    //Handles removal makses sure that erase is an option.
-                    if(tags.size() > 1){
-                        tags.erase(tags.begin()+indexToRemove-1);
-                    }
-                    else{
-                        tags.pop_back();
-                    }
-                    std::cout << "Tag has been removed." << std::endl; 
+                if(tags.size() == 0){
+                    std::cout << "No Tags Available at this time." << std::endl;
                 }
                 else{
-                    std::cout << "Removal was unsuccessful, invalid line found." << std::endl;
+                    std::cout << "Select a tag to remove." << std::endl;
+                    for(int c = 0; c < tags.size(); c++){
+                        std::cout << c+1 << ") " << tags[c].name << std::endl;
+                    }
+                    std::cin >> indexToRemove;
+                    //Handles removal of tags.
+                    if(indexToRemove > 0 && indexToRemove <= tags.size()){
+                        //Handles removal makses sure that erase is an option.
+                        if(tags.size() > 1){
+                            tags.erase(tags.begin()+indexToRemove-1);
+                        }
+                        else{
+                            tags.pop_back();
+                        }
+                        std::cout << "Tag has been removed." << std::endl; 
+                    }
+                    else{
+                        std::cout << "Removal was unsuccessful, invalid line found." << std::endl;
+                    }
                 }
                 break;
             }
