@@ -212,7 +212,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 bool doneMakingChoice = false;
                 int choiceMenuInput;
                 //Sets choice name.
-                std::cout << "What would you like to this new choice to say?" << std::endl;
+                std::cout << "What would you like this new choice to say?" << std::endl;
                 std::getline(std::cin,newChoiceText);
                 newChoice->text = newChoiceText;
                 //Handles tag selection insertion and management.
@@ -310,7 +310,6 @@ std::vector<scene *> sceneManager::sceneSelection(){
                         std::cin.ignore();
                     }
                 }
-                std::cout << newChoice->text << std::endl;
                 activeScene->choices.push_back(newChoice);
                 break;
             }

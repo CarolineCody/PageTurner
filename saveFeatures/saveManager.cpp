@@ -53,7 +53,9 @@ void saveManager::save(){
                     writer << "      |" << scenes[c]->choices[r]->gives[x].amount << "|" << std::endl; //Six spaces.
                 }
                 //Prints out the title of the scene that this choice is linked to.
-                writer << "       |" << scenes[c]->choices[r]->linkScene->getTitle() << "|" << std::endl; //Seven spaces;
+                if(scenes[c]->choices[r]->linkScene){
+                    writer << "       |" << scenes[c]->choices[r]->linkScene->getTitle() << "|" << std::endl; //Seven spaces;
+                }
             }
         }
     }   
