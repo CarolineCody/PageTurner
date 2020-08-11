@@ -37,24 +37,24 @@ void saveManager::save(){
             writer << scenes[c]->getTitle() << std::endl;
             //Gets the text of the scene
             for(int r = 0; r < scenes[c]->text.size(); r++){
-                writer << " |" << scenes[c]->text[r] << "|" << std::endl;
+                writer << " " << scenes[c]->text[r] << std::endl;
             }
             for(int r = 0; r < scenes[c]->choices.size(); r++){
                 //Prints choice text.
-                writer << "  |" << scenes[c]->choices[r]->text << "|" << std::endl; //Two spaces.
+                writer << "  " << scenes[c]->choices[r]->text << std::endl; //Two spaces.
                 //Prints required tags for choice.
                 for(int x = 0; x < scenes[c]->choices[r]->required.size(); x++){
-                    writer << "   |" << scenes[c]->choices[r]->required[x].name << "|" << std::endl; //Three spaces.
-                    writer << "    |" << scenes[c]->choices[r]->required[x].amount << "|" << std::endl; //Four spaces.
+                    writer << "   " << scenes[c]->choices[r]->required[x].name << std::endl; //Three spaces.
+                    writer << "    " << scenes[c]->choices[r]->required[x].amount << std::endl; //Four spaces.
                 }
                 //Prints the give tags for the chioce.
                 for(int x = 0; x < scenes[c]->choices[r]->gives.size(); x++){
-                    writer << "     |" << scenes[c]->choices[r]->gives[x].name << "|" << std::endl; //Five spaces.
-                    writer << "      |" << scenes[c]->choices[r]->gives[x].amount << "|" << std::endl; //Six spaces.
+                    writer << "     " << scenes[c]->choices[r]->gives[x].name << std::endl; //Five spaces.
+                    writer << "      " << scenes[c]->choices[r]->gives[x].amount << std::endl; //Six spaces.
                 }
                 //Prints out the title of the scene that this choice is linked to.
                 if(scenes[c]->choices[r]->linkScene){
-                    writer << "       |" << scenes[c]->choices[r]->linkScene->getTitle() << "|" << std::endl; //Seven spaces;
+                    writer << "       " << scenes[c]->choices[r]->linkScene->getTitle() << std::endl; //Seven spaces;
                 }
             }
         }
@@ -90,13 +90,13 @@ std::vector<scene*> saveManager::transferSaves(){
                 //Gets scene title.
                 while(getline(reader,line) && line.length() > 1 && line[0] == ' ' && line[1] != ' '){
                     lineCount++;
-                    temp->text.push_back(line.substr(2,line.length()-3));
+                    temp->text.push_back(line.substr(1,line.length()-1));
                 }
                 //Creates a choice for the scene (both gives and requires) and then adds them to the scene.
                 while(getline(reader,line) && line.length() > 2 && line[1] == ' ' && line[2] != ' '){
                     lineCount++;
                     choice * tempi = new choice();
-                    tempi->text = line.substr(3,line.length()-4);
+                    tempi->text = line.substr(2,line.length()-2);
                     //Handles giving the new choice its tags. Both amount and name for requires.
                     if(getline(reader,line) && line.length() > 3 && line[2] == ' ' && line[3] != ' '){
                         lineCount++;
@@ -104,7 +104,7 @@ std::vector<scene*> saveManager::transferSaves(){
                         tempo.name = line.substr(4,line.length()-5);
                         if(getline(reader,line) && line.length() > 4 && line[3] == ' ' && line[4] != ' '){
                             lineCount++;
-                            tempo.amount = stoi(line.substr(5,line.length()-6));
+                            tempo.amount = stoi(line.substr(3,line.length()-3));
                         }
                         else{
                             //If no amount tag is found the program will end.
@@ -127,10 +127,10 @@ std::vector<scene*> saveManager::transferSaves(){
                     if(getline(reader,line) && line.length() > 5 && line[4] == ' ' && line[5] != ' '){
                         lineCount++;
                         tag tempo;
-                        tempo.name = line.substr(6,line.length()-7);
+                        tempo.name = line.substr(5,line.length()-5);
                         if(getline(reader,line) && line.length() > 6 && line[5] == ' ' && line[6] != ' '){
                             lineCount++;
-                            tempo.amount = stoi(line.substr(7,line.length()-8));
+                            tempo.amount = stoi(line.substr(6,line.length()-6));
                         }
                         else{
                             lineCount++;
@@ -151,7 +151,7 @@ std::vector<scene*> saveManager::transferSaves(){
                     if(getline(reader,line) && line.length() > 7 && line[6] == ' ' && line[7] != ' '){
                         //Preps and stores a reference to the scene that this choice is linked to for later assignement.
                         lineCount++;
-                        sceneNames.push_back(line.substr(8,line.length()-9));
+                        sceneNames.push_back(line.substr(7,line.length()-7));
                     }
                     else{
                         //Handles error case for an invalid linked scene name was found.
