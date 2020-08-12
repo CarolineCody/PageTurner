@@ -79,6 +79,7 @@ std::vector<scene*> saveManager::transferSaves(){
     reader.open("./saveFeatures/saveFiles/test.txt");
     //Checks to see if file is open.
     if(reader.is_open()){
+        //Thread a common share line.
         while(getline(reader,line)){
             lineCount++;
             //Need some method to check line depth and what have you.
