@@ -82,7 +82,6 @@ std::vector<scene*> saveManager::transferSaves(){
         //Thread a common share line.
         while(getline(reader,line)){
             lineCount++;
-            //Need some method to check line depth and what have you.
             //Found title of scene.
             if(line.length() > 0 && line[0] != ' '){
                 //Makes a new scene;
@@ -92,6 +91,10 @@ std::vector<scene*> saveManager::transferSaves(){
                 while(getline(reader,line) && line.length() > 1 && line[0] == ' ' && line[1] != ' '){
                     lineCount++;
                     temp->text.push_back(line.substr(1,line.length()-1));
+                }
+                //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
+                if(!reader.fail()){
+                    reader.unget();
                 }
                 //Creates a choice for the scene (both gives and requires) and then adds them to the scene.
                 while(getline(reader,line) && line.length() > 2 && line[1] == ' ' && line[2] != ' '){
@@ -117,6 +120,10 @@ std::vector<scene*> saveManager::transferSaves(){
                         //Adds the tag to the choice.
                         tempi->required.push_back(tempo);
                     }
+                    //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
+                    else if(!reader.fail()){
+                        reader.unget();
+                    }
                     else{
                         //If no name is found the program will end.
                         lineCount++;
@@ -133,6 +140,10 @@ std::vector<scene*> saveManager::transferSaves(){
                             lineCount++;
                             tempo.amount = stoi(line.substr(6,line.length()-6));
                         }
+                        //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
+                        else if(!reader.fail()){
+                            reader.unget();
+                        }
                         else{
                             lineCount++;
                             std::cout << "Invalid give tag amount found. Please fix file before continuing." << std::endl;
@@ -141,6 +152,10 @@ std::vector<scene*> saveManager::transferSaves(){
                         }
                         //Adds the tag to the choice.
                         tempi->gives.push_back(tempo);
+                    }
+                    //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
+                    else if(!reader.fail()){
+                        reader.unget();
                     }
                     else{
                         //Handles error cases.
@@ -153,6 +168,10 @@ std::vector<scene*> saveManager::transferSaves(){
                         //Preps and stores a reference to the scene that this choice is linked to for later assignement.
                         lineCount++;
                         sceneNames.push_back(line.substr(7,line.length()-7));
+                    }
+                    //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
+                    else if(!reader.fail()){
+                        reader.unget();
                     }
                     else{
                         //Handles error case for an invalid linked scene name was found.
@@ -167,6 +186,10 @@ std::vector<scene*> saveManager::transferSaves(){
                 }
                 //Finally adds the completed scene back into the library of scenes.
                 scenes.push_back(temp);
+            }
+            //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
+            else if(!reader.fail()){
+                reader.unget();
             }
             //Title not found, need to end the program and kill it with fire!
             else{
