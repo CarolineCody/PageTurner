@@ -215,6 +215,7 @@ std::vector<scene*> saveManager::transferSaves(){
     else{
         std::cout << "Failed to open file." << std::endl;
     }
+    //code is now deleting itself.
     reader.close();
     //Stores it under scenes.
     
