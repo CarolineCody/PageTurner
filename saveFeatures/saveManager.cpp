@@ -95,7 +95,7 @@ std::vector<scene*> saveManager::transferSaves(){
                 //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
                 if(!reader.fail()){
                     for(int c : line){
-                        reader.unget();
+                        reader.putback(line[c]);
                     }
                 }
                 //Creates a choice for the scene (both gives and requires) and then adds them to the scene.
@@ -124,8 +124,9 @@ std::vector<scene*> saveManager::transferSaves(){
                     }
                     //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
                     else if(!reader.fail()){
+                        //Something shifty about unget. I don't think it moves the needle back.
                         for(int c : line){
-                            reader.unget();
+                            reader.putback(line[c]);
                         }
                     }
                     else{
@@ -147,7 +148,7 @@ std::vector<scene*> saveManager::transferSaves(){
                         //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
                         else if(!reader.fail()){
                             for(int c : line){
-                                reader.unget();
+                               reader.putback(line[c]);
                             }
                         }
                         else{
@@ -162,7 +163,7 @@ std::vector<scene*> saveManager::transferSaves(){
                     //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
                     else if(!reader.fail()){
                         for(int c : line){
-                            reader.unget();
+                            reader.putback(line[c]);
                         }
                     }
                     else{
@@ -180,7 +181,7 @@ std::vector<scene*> saveManager::transferSaves(){
                     //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
                     else if(!reader.fail()){
                         for(int c : line){
-                            reader.unget();
+                            reader.putback(line[c]);
                         }
                     }
                     else{
@@ -200,7 +201,7 @@ std::vector<scene*> saveManager::transferSaves(){
             //Back Tracks to the next call to getline will get what was important to the function instead of iterating past it.
             else if(!reader.fail()){
                 for(int c : line){
-                    reader.unget();
+                    reader.putback(line[c]);
                 }
             }
             //Title not found, need to end the program and kill it with fire!
