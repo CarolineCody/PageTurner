@@ -90,7 +90,7 @@ std::vector<scene *> storyMenu::printMenu(){
                     std::cout << "========================================================" << std::endl;
                     if(titleScenes.size() > 0){
                         for(int c = 0; c < titleScenes.size(); c++){
-                            std::cout << c+1 << ") " << titleScenes[c]->getTitle() << "." << std::endl;
+                            std::cout << c+1 << ") " << titleScenes[c]->getTitle() << std::endl;
                         }
                     }
                     else{
