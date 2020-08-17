@@ -227,6 +227,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                     if(tags.size() == 0){
                         std::cout << "No tags available at this time." << std::endl;
                         activeScene->choices.push_back(newChoice);
+                        std::cout << "bip" << std::endl;
                         break;
                         //Create a create tag option here.
                     }
@@ -310,6 +311,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                         std::cin.ignore();
                     }
                 }
+                std::cout << "bop" << std::endl;
                 activeScene->choices.push_back(newChoice);
                 break;
             }
