@@ -225,6 +225,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                         std::cout << c+1 << ") " << tags[c].name << std::endl;
                     }
                     if(tags.size() == 0){
+                        std::cout << "bip" << std::endl;
                         std::cout << "No tags available at this time." << std::endl;
                         activeScene->choices.push_back(newChoice);
                         std::cout << "bip" << std::endl;
@@ -353,6 +354,10 @@ std::vector<scene *> sceneManager::sceneSelection(){
                 break;
             }
             case 5:{
+                if(activeScene->choices.size() <= 0){
+                    std::cout << "No choices available to remove at this time." << std::endl;
+                    break;
+                }
                 std::string choiceName;
                 int choice;
                 bool validChoice = false;
