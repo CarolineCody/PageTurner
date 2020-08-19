@@ -225,96 +225,95 @@ std::vector<scene *> sceneManager::sceneSelection(){
                         std::cout << c+1 << ") " << tags[c].name << std::endl;
                     }
                     if(tags.size() == 0){
-                        std::cout << "bip" << std::endl;
                         std::cout << "No tags available at this time." << std::endl;
                         activeScene->choices.push_back(newChoice);
-                        std::cout << "bip" << std::endl;
                         break;
                         //Create a create tag option here.
                     }
-                    while(!validTagNumber){
-                        std::cin >> tagChoice;
-                        char userCharChoice;
-                        if(tagChoice > 0 && tagChoice <= tags.size()){
-                            validTagNumber = true;
-                            std::cout << "Would you like to add this tag or remove this tag (+/-)?" << std::endl;
-                            std::cout << "Enter anything else to quit."                             << std::endl;
-                            std::cin >> userCharChoice;
-                            switch(userCharChoice){
-                                case '+':{
-                                    //Scene is added.
-                                    int giveOrRequire = 0;
-                                    std::cout << "Would you like it to be given upon selecting this choice? Or Required to select this choice?" << std::endl;
-                                    std::cout << "1) Give." << std::endl;
-                                    std::cout << "2) Take." << std::endl;
-                                    std::cout << "Enter anything else to quit." << std::endl;
-                                    std::cin >> giveOrRequire;
-                                    //Adds to give.
-                                    if(giveOrRequire == 1){
-                                        newChoice->gives.push_back(tags[tagChoice-1]);
-                                    }
-                                    //Adds to require.
-                                    else if(giveOrRequire == 2){
-                                        newChoice->gives.push_back(tags[tagChoice-1]);
-                                    }
-                                    break;
-                                }
-                                case '-':{
-                                    //Handles removal.
-                                    int giveOrRequire = 0;
-                                    std::cout << "From where would you like to remove from?" << std::endl;
-                                    std::cout << "1) Give." << std::endl;
-                                    std::cout << "2) Take." << std::endl;
-                                    std::cout << "Enter anything else to quit." << std::endl;
-                                    std::cin >> giveOrRequire;
-                                    if(giveOrRequire == 1){
-                                        for(int c = 0; c < newChoice->gives.size(); c++){
-                                            if(newChoice->gives[c].name == tags[tagChoice-1].name){
-                                                //Handles give for removal, if there is enough to do an erase, otherwise it is pop_back.
-                                                if(newChoice->gives.size() > 1){
-                                                    newChoice->gives.erase(newChoice->gives.begin()+c);
-                                                }
-                                                else{
-                                                    newChoice->gives.pop_back();
-                                                }
-                                            }
+                    else{
+                        while(!validTagNumber){
+                            std::cin >> tagChoice;
+                            char userCharChoice;
+                            if(tagChoice > 0 && tagChoice <= tags.size()){
+                                validTagNumber = true;
+                                std::cout << "Would you like to add this tag or remove this tag (+/-)?" << std::endl;
+                                std::cout << "Enter anything else to quit."                             << std::endl;
+                                std::cin >> userCharChoice;
+                                switch(userCharChoice){
+                                    case '+':{
+                                        //Scene is added.
+                                        int giveOrRequire = 0;
+                                        std::cout << "Would you like it to be given upon selecting this choice? Or Required to select this choice?" << std::endl;
+                                        std::cout << "1) Give." << std::endl;
+                                        std::cout << "2) Take." << std::endl;
+                                        std::cout << "Enter anything else to quit." << std::endl;
+                                        std::cin >> giveOrRequire;
+                                        //Adds to give.
+                                        if(giveOrRequire == 1){
+                                            newChoice->gives.push_back(tags[tagChoice-1]);
                                         }
+                                        //Adds to require.
+                                        else if(giveOrRequire == 2){
+                                            newChoice->gives.push_back(tags[tagChoice-1]);
+                                        }
+                                        break;
                                     }
-                                    else if(giveOrRequire == 2){
-                                        for(int c = 0; c < newChoice->required.size(); c++){
-                                            if(newChoice->required[c].name == tags[tagChoice-1].name){
+                                    case '-':{
+                                        //Handles removal.
+                                        int giveOrRequire = 0;
+                                        std::cout << "From where would you like to remove from?" << std::endl;
+                                        std::cout << "1) Give." << std::endl;
+                                        std::cout << "2) Take." << std::endl;
+                                        std::cout << "Enter anything else to quit." << std::endl;
+                                        std::cin >> giveOrRequire;
+                                        if(giveOrRequire == 1){
+                                            for(int c = 0; c < newChoice->gives.size(); c++){
                                                 if(newChoice->gives[c].name == tags[tagChoice-1].name){
-                                                //Handles require for removal, if there is enough to do an erase, otherwise it is pop_back.
-                                                if(newChoice->gives.size() > 1){
-                                                    newChoice->gives.erase(newChoice->gives.begin()+c);
-                                                }
+                                                    //Handles give for removal, if there is enough to do an erase, otherwise it is pop_back.
+                                                    if(newChoice->gives.size() > 1){
+                                                        newChoice->gives.erase(newChoice->gives.begin()+c);
+                                                    }
                                                 else{
                                                     newChoice->gives.pop_back();
                                                 }
                                             }
-                                            }
                                         }
                                     }
-                                    break;
+                                        else if(giveOrRequire == 2){
+                                            for(int c = 0; c < newChoice->required.size(); c++){
+                                                if(newChoice->required[c].name == tags[tagChoice-1].name){
+                                                    if(newChoice->gives[c].name == tags[tagChoice-1].name){
+                                                    //Handles require for removal, if there is enough to do an erase, otherwise it is pop_back.
+                                                        if(newChoice->gives.size() > 1){
+                                                            newChoice->gives.erase(newChoice->gives.begin()+c);
+                                                        }
+                                                        else{
+                                                            newChoice->gives.pop_back();
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    }
                                 }
                             }
+                            else if(tagChoice == -1){
+                                std::cout << "Quiting tag adding." << std::endl;
+                                tagChoice = 0;
+                                return scenes;
+                            }
+                            else{
+                                std::cout << "Invalid input." << std::endl;
+                            }
+                            //maybe create a new function that allows the user to make a new tag on the spot or at leat a quit feature.
+                            std::cin.clear();
+                            std::cin.ignore();
                         }
-                        else if(tagChoice == -1){
-                            std::cout << "Quiting tag adding." << std::endl;
-                            tagChoice = 0;
-                            return scenes;
-                        }
-                        else{
-                            std::cout << "Invalid input." << std::endl;
-                        }
-                        //maybe create a new function that allows the user to make a new tag on the spot or at leat a quit feature.
-                        std::cin.clear();
-                        std::cin.ignore();
                     }
+                    activeScene->choices.push_back(newChoice);
+                    break;
                 }
-                std::cout << "bop" << std::endl;
-                activeScene->choices.push_back(newChoice);
-                break;
             }
             case 4:{
                 //Handles choice changing.
