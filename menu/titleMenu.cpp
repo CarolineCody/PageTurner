@@ -14,9 +14,9 @@ void titleMenu::printMenu(){
     std::cout << "========================================================" << std::endl;
     std::cout << "|                 Welcome to PageTurner                |" << std::endl;
     std::cout << "========================================================" << std::endl;
-    std::cout << "| 1) Create or Edit a Story                            |" << std::endl;
-    std::cout << "| 2) Play a Story                                      |" << std::endl;
-    std::cout << "| 3) Quit                                              |" << std::endl;
+    std::cout << "| 1) Create or Edit a Story.                           |" << std::endl;
+    std::cout << "| 2) Play a Story.                                     |" << std::endl;
+    std::cout << "| 3) Quit.                                             |" << std::endl;
     std::cout << "========================================================" << std::endl;
     std::cin >> userInput;
     //Prints the menu options.

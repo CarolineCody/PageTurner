@@ -314,6 +314,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                     activeScene->choices.push_back(newChoice);
                     break;
                 }
+                break;
             }
             case 4:{
                 //Handles choice changing.
