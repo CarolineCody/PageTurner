@@ -461,7 +461,7 @@ void sceneManager::tagsManager(){
                 std::cout << "Enter the name of the tag you would like to create." << std::endl;
                 std::getline(std::cin,tagName);
                 std::cin.clear();
-                std::cin.ignore();
+                //std::cin.ignore();
                 //Enter the tag value.
                 bool foundAmount = false;
                 while(!foundAmount){
