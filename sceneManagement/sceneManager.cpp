@@ -183,6 +183,7 @@ std::vector<scene *> sceneManager::sceneSelection(){
                                         break;
                                     }
                                 }
+                                doneMakingChoice = true;
                             }
                             //Stops loop.
                             else if(tagChoice == -1){
